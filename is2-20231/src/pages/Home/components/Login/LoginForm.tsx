@@ -1,16 +1,32 @@
 import React, { useState } from "react";
 import FormState from "./LoginFormState";
-import Box from '@mui/material/Box';
-import TextField from "@mui/material/TextField";
+import {TextField, Box} from "@mui/material";
 import Button from "@mui/material/Button";
 import { FormWrapper, StyledBox, StyledButton } from "../../Styles/layout.style.component";
+
+interface LoginFormValues {
+	email: string;
+    password: string;
+}
 
 const height: string = "50px";
 const width: string = "400px";
 const margin: string = "20px";
 const radius: string = "30px";
 
-const LoginForm = () => {
+const LoginForm: React.FC = () => {
+	const [formValues, setFormValues] = useState<LoginFormValues>({
+		email: '',
+		password: '',
+	});
+	
+	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = event.target;
+		setFormValues((prevState) => ({
+		  ...prevState,
+		  [name]: value,
+		}));
+	};
   return (
     <FormWrapper>
 		<StyledBox>
@@ -30,6 +46,8 @@ const LoginForm = () => {
 						id="outlined-basic"
 						label="Correo electrónico"
 						type="email"
+						value={formValues.email}
+						onChange={handleChange}
 					/>
 				</div>
 					
@@ -38,6 +56,8 @@ const LoginForm = () => {
 						label="Contraseña"
 						variant="outlined"
 						type="password"
+						value={formValues.password}
+						onChange={handleChange}
 					/>
 				</div>
 				<StyledButton 
