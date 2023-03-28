@@ -4,7 +4,7 @@ import Logo from '../../assets/Logo.svg';
 import LoginForm from './components/Login/LoginForm';
 export interface HomeInterface {}
 
-const Home : React.FC<HomeInterface> = () => {
+const HomePage : React.FC<HomeInterface> = () => {
 	return (
 	<HomeWrapper>
 		<LogoWrapper>
@@ -15,4 +15,4 @@ const Home : React.FC<HomeInterface> = () => {
 	);
 };
 
-export default Home;
+export default HomePage;

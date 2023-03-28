@@ -1,12 +1,13 @@
 import { useState } from "react";
 import "./App.css";
-import { Home } from "./pages";
+import { BrowserRouter } from "react-router-dom";
+import AppRouter from "./Router";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <Home />
+    <BrowserRouter>
+      <AppRouter />
+    </BrowserRouter>
   );
 }
 
