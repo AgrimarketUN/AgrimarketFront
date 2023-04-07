@@ -1,15 +1,10 @@
 import { FormWrapper, HomeGrid, StyledBox, StyledButton } from "@/common";
+import { UserCreate } from "@/models";
 import { Box, TextField } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { signUpValidationSchema } from "./utils/signUpValidationSchema";
+import post from "@/services/axiosService";
 export interface SignUpProps {}
-
-interface LoginFormValues {
-  name: string;
-  lastName: string;
-  phone: string;
-  email: string;
-  password: string;
-}
 
 const height: string = "50px";
 const width: string = "400px";
@@ -17,13 +12,14 @@ const margin: string = "20px";
 const radius: string = "30px";
 
 const SignUpPage: React.FC<SignUpProps> = () => {
-  const [formValues, setFormValues] = useState<LoginFormValues>({
+  const [formValues, setFormValues] = useState<UserCreate>({
     name: "",
     lastName: "",
-    phone: "",
     email: "",
     password: "",
-  });
+    address: "",
+    phone: null,
+    });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -33,26 +29,48 @@ const SignUpPage: React.FC<SignUpProps> = () => {
     }));
   };
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+      signUpValidationSchema
+        .validate(formValues)
+        .then((values) => {
+          console.log("Validación correcta", values);
+          const fetchAuth = async () => {
+            const response = await post("sign/register", values);
+            console.log(response);
+          };
+          
+          useEffect(() => {
+            try {
+              fetchAuth();
+            } catch (error) {}
+          }, [])
+        })
+        .catch((error) => {
+          console.log("Validación incorrecta", error);
+        });
+  };
+
   return (
     <HomeGrid>
-      <FormWrapper>
-        <StyledBox>
-          <Box
-            component="form"
-            noValidate
-            autoComplete="off"
-            className="childComponent"
-            sx={{
-              "& .MuiTextField-root": {
-                marginBottom: margin,
-                width: width,
-                height: height,
-              },
-              "& button": { marginBottom: margin },
-            }}
-          >
+      <FormWrapper
+        component="form"
+        noValidate
+        autoComplete="off"
+        className="childComponent"
+        sx={{
+          "& .MuiTextField-root": {
+            marginBottom: margin,
+            width: width,
+            height: height,
+          },
+          "& button": { marginBottom: margin },
+        }}
+        onSubmit={handleSubmit}
+      >
             <TextField
               id="name"
+              name="name"
               label="Nombre"
               type="text"
               value={formValues.name}
@@ -62,6 +80,7 @@ const SignUpPage: React.FC<SignUpProps> = () => {
             />
             <TextField
               id="lastName"
+              name="lastName"
               label="Apellido"
               type="text"
               value={formValues.lastName}
@@ -70,23 +89,18 @@ const SignUpPage: React.FC<SignUpProps> = () => {
               required
             />
             <TextField
-              id="phone"
-              label="Telefono"
-              type="text"
-              value={formValues.phone}
-              onChange={handleChange}
-              variant="outlined"
-              required
-            />
-            <TextField
-              id="outlined-basic"
+              id="email"
+              name="email"
               label="Correo electrónico"
               type="email"
+              variant="outlined"
               value={formValues.email}
               onChange={handleChange}
               required
             />
             <TextField
+              id="password"
+              name="password"
               label="Contraseña"
               variant="outlined"
               type="password"
@@ -94,11 +108,29 @@ const SignUpPage: React.FC<SignUpProps> = () => {
               onChange={handleChange}
               required
             />
+            <TextField
+              id="address"
+              name="address"
+              label="Dirección"
+              type="text"
+              value={formValues.address}
+              onChange={handleChange}
+              variant="outlined"
+              required
+            />
+            <TextField
+              id="phone"
+              name="phone"
+              label="Telefono"
+              type="number"
+              value={formValues.phone}
+              onChange={handleChange}
+              variant="outlined"
+              required
+            />
             <StyledButton variant="contained" type="submit">
               Crear cuenta
             </StyledButton>
-          </Box>
-        </StyledBox>
       </FormWrapper>
     </HomeGrid>
   );

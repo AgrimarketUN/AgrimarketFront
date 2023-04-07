@@ -1,13 +1,16 @@
-import { useState } from "react";
 import "./App.css";
+import { SnackbarProvider } from "notistack";
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./Router";
+import { Snackbar } from "@mui/material";
 
 function App() {
   return (
-    <BrowserRouter>
-      <AppRouter />
-    </BrowserRouter>
+    <SnackbarProvider>
+      <BrowserRouter>
+        <AppRouter />
+      </BrowserRouter>
+    </SnackbarProvider>
   );
 }
 
