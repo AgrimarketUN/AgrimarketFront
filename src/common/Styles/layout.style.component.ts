@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import background from '../../assets/Homebackground.svg';
+import background from '@/assets/Homebackground.svg';
 
 
 export const HomeWrapper = styled.div`
