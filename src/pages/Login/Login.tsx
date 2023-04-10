@@ -23,6 +23,18 @@ const LoginPage: React.FC<LoginProps> = () => {
     password: "",
   });
   
+  // Leer el valor del correo electrónico de la URL
+  const queryParams = new URLSearchParams(location.search);
+  const email = queryParams.get("email") || "";
+
+  // Establecer el valor del correo electrónico en el estado local
+  useEffect(() => {
+    setFormValues((prevState) => ({
+      ...prevState,
+      email,
+    }));
+  }, [email]);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormValues((prevState) => ({

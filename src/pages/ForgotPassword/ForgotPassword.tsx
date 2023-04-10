@@ -77,7 +77,7 @@ const ForgotPasswordPage: React.FC<ForgotPasswordProps> = () => {
         <StyledButton variant="contained" type="submit" name="reset">
           Restablecer contraseña
         </StyledButton>
-        <StyledTextButton onClick={() => navigate("login")}>
+        <StyledTextButton onClick={() => navigate("/?mtail=${formValues.email}")}>
           Iniciar sesión
         </StyledTextButton>
       </FormWrapper>
