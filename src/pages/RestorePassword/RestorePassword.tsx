@@ -32,72 +32,79 @@ const ResetPasswordPage: React.FC<ResetPasswordProps> = () => {
     }));
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    resetPasswordValidationSchema
-      .validate(formValues)
-      .then((values) => {
-        console.log("Validación correcta", values);
-        const resetPassword = async () => {
-          try {
-            const response = await post("reset-password", values);
-            console.log(response);
-            setShowMessage(true);
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        resetPassword();
-      })
-      .catch((error) => {
-        console.log("Validación incorrecta", error);
-      });
-  };
+const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  return (
-    <HomeGrid>
-      <FormWrapper
-        component="form"
-        noValidate
-        autoComplete="off"
-        className="childComponent"
-        sx={{
-          "& .MuiTextField-root": {
-            marginBottom: margin,
-            width: width,
-            height: height,
-          },
-          "& button": { marginBottom: margin },
-        }}
-        onSubmit={handleSubmit}
-      >
-        <TextField
-          id="password"
-          name="password"
-          label="Nueva contraseña"
-          variant="outlined"
-          type="password"
-          value={formValues.password}
-          onChange={handleChange}
-        />
-        <TextField
-          id="confirmPassword"
-          name="confirmPassword"
-          label="Confirmar contraseña"
-          variant="outlined"
-          type="password"
-          value={formValues.confirmPassword}
-          onChange={handleChange}
-        />
-        {showMessage ? (
-          <p>Tu contraseña se ha actualizado con éxito.</p>
-        ) : null}
-        <StyledButton variant="contained" type="submit" name="reset">
-          Restablecer contraseña
-        </StyledButton>
-      </FormWrapper>
-    </HomeGrid>
-  );
+const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  event.preventDefault();
+  resetPasswordValidationSchema
+    .validate(formValues)
+    .then((values) => {
+      console.log("Validación correcta", values);
+      const resetPassword = async () => {
+        try {
+          const response = await post("reset-password", values);
+          console.log(response);
+          setShowMessage(true);
+        } catch (error) {
+          console.log(error);
+          setErrorMessage("Hubo un error al restablecer la contraseña. Por favor, inténtalo de nuevo más tarde.");
+        }
+      };
+      resetPassword();
+    })
+    .catch((error) => {
+      console.log("Validación incorrecta", error);
+      setErrorMessage("Por favor, completa los campos requeridos correctamente.");
+    });
+};
+
+return (
+  <HomeGrid>
+    <FormWrapper
+      component="form"
+      noValidate
+      autoComplete="off"
+      className="childComponent"
+      sx={{
+        "& .MuiTextField-root": {
+          marginBottom: margin,
+          width: width,
+          height: height,
+        },
+        "& button": { marginBottom: margin },
+      }}
+      onSubmit={handleSubmit}
+    >
+      <TextField
+        id="password"
+        name="password"
+        label="Nueva contraseña"
+        variant="outlined"
+        type="password"
+        value={formValues.password}
+        onChange={handleChange}
+      />
+      <TextField
+        id="confirmPassword"
+        name="confirmPassword"
+        label="Confirmar contraseña"
+        variant="outlined"
+        type="password"
+        value={formValues.confirmPassword}
+        onChange={handleChange}
+      />
+      {showMessage ? (
+        <p>Tu contraseña se ha actualizado con éxito.</p>
+      ) : null}
+      {errorMessage ? (
+        <p style={{ color: "red" }}>{errorMessage}</p>
+      ) : null}
+      <StyledButton variant="contained" type="submit" name="reset">
+        Restablecer contraseña
+      </StyledButton>
+    </FormWrapper>
+  </HomeGrid>
+);
 };
 
 export default ResetPasswordPage;
