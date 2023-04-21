@@ -21,6 +21,8 @@ const ForgotPasswordPage: React.FC<ForgotPasswordProps> = () => {
     email: "",
   });
 
+  const [showMessage, setShowMessage] = useState(false); // Nuevo estado para mostrar mensaje
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormValues((prevState) => ({
@@ -38,7 +40,7 @@ const ForgotPasswordPage: React.FC<ForgotPasswordProps> = () => {
         const fetchResetPassword = async () => {
           const response = await post("password/reset", values);
           console.log(response);
-          navigate("login");
+          setShowMessage(true); // Actualizar estado para mostrar mensaje
         };
 
         fetchResetPassword();
@@ -77,8 +79,11 @@ const ForgotPasswordPage: React.FC<ForgotPasswordProps> = () => {
         <StyledButton variant="contained" type="submit" name="reset">
           Restablecer contraseña
         </StyledButton>
+        {showMessage && ( // Mostrar mensaje cuando showMessage es verdadero
+          <p>Se ha enviado un correo electrónico de restablecimiento de contraseña.</p>
+        )}
         <StyledTextButton onClick={() => navigate("/?mtail=${formValues.email}")}>
-          Iniciar sesión
+          Volver
         </StyledTextButton>
       </FormWrapper>
     </HomeGrid>
