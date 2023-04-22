@@ -1,14 +1,14 @@
 import { number, object, string } from "yup";
 
 export const signUpValidationSchema = object().shape({
-  name: string().required("Campo requerido"),
-  lastName: string().required("Campo requerido"),
+  firstname: string().required("Nombre requerido"),
+  lastname: string().required("Apellido requerido"),
   email: string()
-    .email("Correo electrónico inválido")
-    .required("Campo requerido"),
-  password: string().required("Campo requerido").min(8, "La contraseña debe contener mínimo 8 caracteres"),
-  address: string().required("Campo requerido"),
+    .required("Correo requerido")
+    .email("Correo electrónico inválido"),
+  password: string().required("Contraseña requerido").min(8, "La contraseña debe contener mínimo 8 caracteres"),
+  address: string().required("Dirección requerido"),
   phone: string()
-    .matches(/^\d{10}$/, 'El número de teléfono debe tener 10 dígitos')
-    .required("Campo requerido"),
+    .required("Telefono requerido")
+    .matches(/^\d{10}$/, 'El número de teléfono debe tener 10 dígitos'),
 });

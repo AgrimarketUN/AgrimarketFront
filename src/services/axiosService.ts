@@ -1,15 +1,10 @@
-import { baseurl } from "@/common";
+import { api } from "@/common";
 import { UserCredentials, UserCreate } from "@/models";
 import axios from "axios";
 
-export function post(url: string, data: UserCredentials | UserCreate) {
-  return axios.post(`${baseurl}${url}`, data)
-    .then((response) => {
-      return response;
-    })
-    .catch((error) => {
-      return error;
-    });
+export const post = async (url: string, data: UserCredentials | UserCreate) => {
+  const response = await axios.post(`${api.baseurl}${url}`, data);
+  return response.data;
 }
 
 export default post;
