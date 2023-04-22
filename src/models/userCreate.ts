@@ -1,9 +1,9 @@
 export interface UserCreate {
-  name: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   email: string;
   password: string;
   address: string;
-  phone: number | null;
-  //seller: boolean | null;
+  phone: string;
+  isSeller: boolean;
 };

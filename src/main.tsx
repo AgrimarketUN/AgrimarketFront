@@ -5,7 +5,7 @@ import './index.css'
 import { AxiosInterceptor } from '@/interceptors'
 import { LayoutContainer } from '@/styled-components'
 
-AxiosInterceptor();
+//AxiosInterceptor();
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>

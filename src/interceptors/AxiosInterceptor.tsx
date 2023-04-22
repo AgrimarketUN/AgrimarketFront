@@ -4,24 +4,18 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 export interface AxiosProps {}
 
 const AxiosInterceptor = () => {
-	const updateHeader = (request: AxiosRequestConfig) => {
-		const token = localStorage.getItem('token');
-		const newHeaders = {
-			Authorization: token,
-			'Content-Type': 'application/json',
-		};
-		request.headers = newHeaders;
-		return request;
-	};
 
 	axios.interceptors.request.use((request) => {
-		if (request.url?.includes('publico')) return request;
-		return updateHeader(request);
+		const token = localStorage.getItem('token');
+		if (request.url?.includes('publico')){
+			request.headers.Authorization = token ? `Bearer ${token}` : '';
+		}
+		return request;
 	});
 
 	axios.interceptors.response.use(
 		(response) => {
-			console.log(response);
+			console.log("response:", response.data);
 			SnackBarUtils.success('Operación exitosa');
 			return response;
 		},

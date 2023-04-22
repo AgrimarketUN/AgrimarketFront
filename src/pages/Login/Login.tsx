@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { HomeGrid } from "@/common";
+import { HomeGrid, api } from "@/common";
 import { TextField } from "@mui/material";
 import { FormWrapper, StyledButton, StyledTextButton } from "@/common";
 import { useNavigate } from "react-router-dom";
 import { loginValidationSchema } from "./utils/loginValidationSchema";
-import { authService } from "@/services";
 import { UserCredentials } from "@/models";
 import post from "@/services/axiosService";
 
@@ -40,23 +39,23 @@ const LoginPage: React.FC<LoginProps> = () => {
     } else {
       loginValidationSchema
         .validate(formValues)
-        .then((values) => {
-          console.log("Validación correcta", values);
-          const fetchAuth = async () => {
-            const response = await post("sign/login", values);
-            localStorage.setItem("token", response.token);
-            navigate("dashboard")
-            //console.log(response);
+        .then((formValues) => {
+          const authUser = async () => {
+            const data = await post(api.login, formValues);
+            sessionStorage.setItem("token", data.token);
+            return data;
           };
-          
-          useEffect(() => {
-            try {
-              fetchAuth();
-            } catch (error) {}
-          }, [])
+          const promise = authUser();
+          promise.then((data) => {
+            console.log("Data:", data);
+            if(sessionStorage.getItem("token")){
+              console.log("Validación correcta")
+              navigate("dashboard");
+            }
+          })
         })
         .catch((error) => {
-          console.log("Validación incorrecta", error);
+          console.log("Error:", error);
         });
     }
   };
@@ -66,7 +65,7 @@ const LoginPage: React.FC<LoginProps> = () => {
       <FormWrapper
         component="form"
         noValidate
-        autoComplete="off"
+        autoComplete="on"
         className="childComponent"
         sx={{
           "& .MuiTextField-root": {
@@ -97,7 +96,7 @@ const LoginPage: React.FC<LoginProps> = () => {
           onChange={handleChange}
         />
         <StyledTextButton onClick={() => navigate("forgotPassword")}>
-          ¿Olvidó su contraseña?
+          ¿Olvidó su password?
         </StyledTextButton>
         <StyledButton variant="contained" type="submit" name="login">
           Iniciar sesión

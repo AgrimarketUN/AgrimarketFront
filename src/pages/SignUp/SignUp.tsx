@@ -1,9 +1,10 @@
-import { FormWrapper, HomeGrid, StyledBox, StyledButton } from "@/common";
+import { FormWrapper, HomeGrid, StyledBox, StyledButton, api } from "@/common";
 import { UserCreate } from "@/models";
-import { Box, TextField } from "@mui/material";
+import { Box, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { signUpValidationSchema } from "./utils/signUpValidationSchema";
 import post from "@/services/axiosService";
+import { useNavigate } from "react-router-dom";
 export interface SignUpProps {}
 
 const height: string = "50px";
@@ -12,14 +13,17 @@ const margin: string = "20px";
 const radius: string = "30px";
 
 const SignUpPage: React.FC<SignUpProps> = () => {
+  const navigate = useNavigate();
+
   const [formValues, setFormValues] = useState<UserCreate>({
-    name: "",
-    lastName: "",
+    firstname: "",
+    lastname: "",
     email: "",
     password: "",
     address: "",
-    phone: null,
-    });
+    phone: "",
+    isSeller: false,
+  });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -31,24 +35,20 @@ const SignUpPage: React.FC<SignUpProps> = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-      signUpValidationSchema
-        .validate(formValues)
-        .then((values) => {
-          console.log("Validación correcta", values);
-          const fetchAuth = async () => {
-            const response = await post("sign/register", values);
-            console.log(response);
-          };
-          
-          useEffect(() => {
-            try {
-              fetchAuth();
-            } catch (error) {}
-          }, [])
-        })
-        .catch((error) => {
-          console.log("Validación incorrecta", error);
+    signUpValidationSchema
+      .validate(formValues)
+      .then((formValues) => {
+        console.log("Validación correcta", formValues);
+        const fetchAuth = async () => {
+          const response = await post(api.register, formValues);
+        };
+        fetchAuth().then(() => {
+          navigate("/", { replace: true });
         });
+      })
+      .catch((error) => {
+        console.log("Validación incorrecta", error);
+      });
   };
 
   return (
@@ -56,7 +56,7 @@ const SignUpPage: React.FC<SignUpProps> = () => {
       <FormWrapper
         component="form"
         noValidate
-        autoComplete="off"
+        autoComplete="on"
         className="childComponent"
         sx={{
           "& .MuiTextField-root": {
@@ -68,69 +68,69 @@ const SignUpPage: React.FC<SignUpProps> = () => {
         }}
         onSubmit={handleSubmit}
       >
-            <TextField
-              id="name"
-              name="name"
-              label="Nombre"
-              type="text"
-              value={formValues.name}
-              onChange={handleChange}
-              variant="outlined"
-              required
-            />
-            <TextField
-              id="lastName"
-              name="lastName"
-              label="Apellido"
-              type="text"
-              value={formValues.lastName}
-              onChange={handleChange}
-              variant="outlined"
-              required
-            />
-            <TextField
-              id="email"
-              name="email"
-              label="Correo electrónico"
-              type="email"
-              variant="outlined"
-              value={formValues.email}
-              onChange={handleChange}
-              required
-            />
-            <TextField
-              id="password"
-              name="password"
-              label="Contraseña"
-              variant="outlined"
-              type="password"
-              value={formValues.password}
-              onChange={handleChange}
-              required
-            />
-            <TextField
-              id="address"
-              name="address"
-              label="Dirección"
-              type="text"
-              value={formValues.address}
-              onChange={handleChange}
-              variant="outlined"
-              required
-            />
-            <TextField
-              id="phone"
-              name="phone"
-              label="Telefono"
-              type="number"
-              value={formValues.phone}
-              onChange={handleChange}
-              variant="outlined"
-              required
-            />
-            <StyledButton variant="contained" type="submit">
-              Crear cuenta
-            </StyledButton>
+        <TextField
+          id="firstname"
+          name="firstname"
+          label="Nombre"
+          type="text"
+          value={formValues.firstname}
+          onChange={handleChange}
+          variant="outlined"
+          required
+        />
+        <TextField
+          id="lastname"
+          name="lastname"
+          label="Apellido"
+          type="text"
+          value={formValues.lastname}
+          onChange={handleChange}
+          variant="outlined"
+          required
+        />
+        <TextField
+          id="email"
+          name="email"
+          label="Correo electrónico"
+          type="email"
+          variant="outlined"
+          value={formValues.email}
+          onChange={handleChange}
+          required
+        />
+        <TextField
+          id="password"
+          name="password"
+          label="Contraseña"
+          variant="outlined"
+          type="password"
+          value={formValues.password}
+          onChange={handleChange}
+          required
+        />
+        <TextField
+          id="address"
+          name="address"
+          label="Dirección"
+          type="text"
+          value={formValues.address}
+          onChange={handleChange}
+          variant="outlined"
+          required
+        />
+        <TextField
+          id="phone"
+          name="phone"
+          label="Teléfono"
+          type="number"
+          value={formValues.phone}
+          onChange={handleChange}
+          variant="outlined"
+          required
+        />
+        <StyledButton variant="contained" type="submit">
+          Crear cuenta
+        </StyledButton>
       </FormWrapper>
     </HomeGrid>
   );

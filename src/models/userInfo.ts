@@ -1,8 +1,8 @@
 export interface UserInfo {
   token: string;
-  name: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   email: string;
   phone: number;
-  seller: boolean | null;
+  isSeller: boolean | null;
 };
