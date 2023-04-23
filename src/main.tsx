@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
 import { AxiosInterceptor } from '@/interceptors'
-import { LayoutContainer } from '@/styled-components'
+import { layoutContainer } from '@/styled-components'
 
 //AxiosInterceptor();
 
