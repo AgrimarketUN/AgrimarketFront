@@ -5,6 +5,7 @@ import { NavBar } from "./NavBar";
 export const RouterLayout: React.FC<{}> = () => {
   return (
     <>
+      <NavBar />
       <Outlet />
     </>
   );

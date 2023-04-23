@@ -7,4 +7,9 @@ export const post = async (url: string, data: UserCredentials | UserCreate) => {
   return response.data;
 }
 
+export const get = async (url: string) => {
+  const response = await axios.get(`${api.baseurl}${url}`);
+  return response.data;
+}
+
 export default post;
