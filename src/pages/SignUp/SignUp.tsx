@@ -3,8 +3,8 @@ import { UserCreate } from "@/models";
 import { Box, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { signUpValidationSchema } from "./utils/signUpValidationSchema";
-import post from "@/services/axiosService";
 import { useNavigate } from "react-router-dom";
+import { post } from "@/services";
 export interface SignUpProps {}
 
 const height: string = "50px";

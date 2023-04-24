@@ -4,8 +4,7 @@ import { TextField } from "@mui/material";
 import { FormWrapper, StyledButton, StyledTextButton } from "@/common";
 import { useNavigate } from "react-router-dom";
 import resetPasswordValidationSchema from "./utils/resetPasswordValidationSchema";
-import { authService } from "@/services";
-import post from "@/services/axiosService";
+import { post } from "@/services";
 
 export interface ResetPasswordProps {}
 
