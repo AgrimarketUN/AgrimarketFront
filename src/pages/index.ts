@@ -1,4 +1,4 @@
-export * from './DashBoard';
+export { default as DashBoard } from './DashBoard/DashBoard';
 export { default as ForgotPassword } from './ForgotPassword/ForgotPassword';
 export * from './ForgotPassword/utils/forgotPasswordValidationSchema';
 export { default as Login } from './Login/Login';
