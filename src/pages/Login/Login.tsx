@@ -5,7 +5,7 @@ import { FormWrapper, StyledButton, StyledTextButton } from "@/common";
 import { useNavigate } from "react-router-dom";
 import { loginValidationSchema } from "./utils/loginValidationSchema";
 import { UserCredentials } from "@/models";
-import post from "@/services/axiosService";
+import { post } from "@/services";
 
 export interface LoginProps {}
 
@@ -61,7 +61,6 @@ const LoginPage: React.FC<LoginProps> = () => {
           promise.then((data) => {
             console.log("Data:", data);
             if(sessionStorage.getItem("token")){
-              console.log("Validación correcta")
               navigate("dashboard");
             }
           })

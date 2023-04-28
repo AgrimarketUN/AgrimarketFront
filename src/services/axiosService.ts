@@ -11,5 +11,3 @@ export const get = async (url: string) => {
   const response = await axios.get(`${api.baseurl}${url}`);
   return response.data;
 }
-
-export default post;
