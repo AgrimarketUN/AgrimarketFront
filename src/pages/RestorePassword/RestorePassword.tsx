@@ -38,11 +38,11 @@ const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
   event.preventDefault();
   resetPasswordValidationSchema
     .validate(formValues)
-    .then((values) => {
-      console.log("Validación correcta", values);
+    .then((formvalues) => {
+      console.log("Validación correcta", formvalues);
       const resetPassword = async () => {
         try {
-          const response = await post("reset-password", values);
+          const response = await post("reset-password", formvalues);
           console.log(response);
           setShowMessage(true);
         } catch (error) {
