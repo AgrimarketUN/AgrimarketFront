@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { HomeGrid, api } from "@/common";
+import { api } from "@/common";
+import { HomeGrid} from "@/components";
 import { TextField } from "@mui/material";
 import { FormWrapper, StyledButton, StyledTextButton } from "@/common";
 import { useNavigate } from "react-router-dom";
@@ -21,18 +22,6 @@ const LoginPage: React.FC<LoginProps> = () => {
     email: "",
     password: "",
   });
-  
-  // Leer el valor del correo electrónico de la URL
-  const queryParams = new URLSearchParams(location.search);
-  const email = queryParams.get("email") || "";
-
-  // Establecer el valor del correo electrónico en el estado local
-  useEffect(() => {
-    setFormValues((prevState) => ({
-      ...prevState,
-      email,
-    }));
-  }, [email]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -54,14 +43,16 @@ const LoginPage: React.FC<LoginProps> = () => {
         .then((formValues) => {
           const authUser = async () => {
             const data = await post(api.login, formValues);
-            sessionStorage.setItem("token", data.token);
             return data;
           };
           const promise = authUser();
           promise.then((data) => {
-            console.log("Data:", data);
-            if(sessionStorage.getItem("token")){
-              navigate("dashboard");
+            if(data !== "BAD"){
+              sessionStorage.setItem("token", data.token);
+              console.log("Token:", sessionStorage.getItem("token"));
+              if(sessionStorage.getItem("token") !== 'undefined'){
+                navigate("dashboard");
+              }
             }
           })
         })

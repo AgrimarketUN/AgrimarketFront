@@ -1,4 +1,5 @@
-import { FormWrapper, HomeGrid, StyledBox, StyledButton, api } from "@/common";
+import { FormWrapper, StyledBox, StyledButton, api } from "@/common";
+import { HomeGrid } from "@/components";
 import { UserCreate } from "@/models";
 import { Box, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from "@mui/material";
 import React, { useState, useEffect } from "react";

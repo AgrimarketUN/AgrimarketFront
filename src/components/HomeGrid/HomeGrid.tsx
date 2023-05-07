@@ -1,6 +1,6 @@
 import { HomeWrapper, LogoWrapper, LogoImg } from '@/common/Styles/layout.style.component';
 import React from 'react';
-import Logo from '../../../assets/Logo.svg';
+import Logo from '../../assets/Logo.svg';
 export interface HomeGridProps {
 	children: React.ReactNode;
 }

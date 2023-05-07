@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { HomeGrid } from "@/common";
+import { HomeGrid } from "@/components";
 import { TextField } from "@mui/material";
 import { FormWrapper, StyledButton, StyledTextButton } from "@/common";
 import { useNavigate } from "react-router-dom";

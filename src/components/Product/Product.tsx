@@ -1,29 +1,39 @@
-import { Button, Card, CardActions, CardContent, CardMedia, IconButton, Typography } from '@mui/material'
-import React from 'react'
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import {
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  IconButton,
+  Typography,
+} from "@mui/material";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { Product as ProductInterface } from "@/models";
 
-export const CardComponent: React.FC<{}> = () => {
-    return (
-        <Card sx={{ maxWidth: 345 }}>
-            <CardMedia
-                component="img"
-                height="194"
-                image="https://thumbs.dreamstime.com/z/imagen-del-tema-de-los-productos-agr%C3%ADcolas-34266908.jpg"
-                alt="Imagen Producto"
-            />
-            <CardContent>
-                <Typography variant='h6'>Nombre</Typography>
-                <Typography>Descripción</Typography>
-                <Typography>Precio</Typography>
-            </CardContent>
-            <CardActions>
-                <IconButton aria-label='Añadir al carrito'>
-                    <AddShoppingCartIcon/>
-                </IconButton>
-                <Button variant='contained' size='small'>Comprar</Button>
-            </CardActions>
-        </Card>
-    )
-}
+function Product({ product }: { product: ProductInterface}) {
+  return (
+    <Card sx={{ maxWidth: 345 }}>
+      <CardMedia
+        component="img"
+        height="194"
+        image= {product.image}
+        alt={"Imagen producto "+product.name}
+      />
+      <CardContent>
+        <Typography variant="h6">{product.name}</Typography>
+        <Typography>{product.description}</Typography>
+        <Typography>{"$ "+product.price}</Typography>
+      </CardContent>
+      <CardActions>
+        <IconButton aria-label="Añadir al carrito">
+          <AddShoppingCartIcon />
+        </IconButton>
+        <Button variant="contained" size="small">
+          Comprar
+        </Button>
+      </CardActions>
+    </Card>
+  );
+};
 
-
+export default Product;
