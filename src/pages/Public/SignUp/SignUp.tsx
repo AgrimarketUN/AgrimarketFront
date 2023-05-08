@@ -1,7 +1,7 @@
-import { FormWrapper, StyledBox, StyledButton, api } from "@/common";
+import { FormWrapper, StyledButton, api } from "@/common";
 import { HomeGrid } from "@/components";
 import { UserCreate } from "@/models";
-import { Box, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { signUpValidationSchema } from "./utils/signUpValidationSchema";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +11,6 @@ export interface SignUpProps {}
 const height: string = "50px";
 const width: string = "400px";
 const margin: string = "20px";
-const radius: string = "30px";
 
 const SignUpPage: React.FC<SignUpProps> = () => {
   const navigate = useNavigate();

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { api } from "@/common";
 import { get } from "@/services";
-import { PrivateGrid } from "@/common";
+import { PrivateGrid } from "@/components";
 import { Product } from "@/models/product";
 import ProductsGrid from "./Components/ProductsGrid";
 

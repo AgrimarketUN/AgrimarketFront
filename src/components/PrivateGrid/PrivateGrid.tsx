@@ -1,6 +1,6 @@
 import React from "react";
-import NavBar from "./NavBar";
-import { PrivateWrapper } from "./Styles/layout.style.component";
+import { PrivateWrapper } from "../../common/Styles/layout.style.component";
+import NavBar from "../../common/NavBar";
 
 export interface PrivateGritProps {
   children: React.ReactNode;
