@@ -24,9 +24,9 @@ const DashBoard : React.FC<{}> = () => {
     const promise = getProducts();
 
     promise.then((data)=>{
-      setProducts(data);
-      console.log(data);
-    })
+      setProducts(data);      
+      console.log("🚀 ~ Impresión datos", data)
+    })      
     .catch((e)=>{
       console.error(e)
     })

@@ -4,6 +4,8 @@ import { RouterLayout } from "./common";
 import { NavBar } from "./common";
 import { ForgotPassword, Login, SignUp, MarketCar, DashBoard} from "@/pages";
 import RestorePassword from "./pages/RestorePassword/RestorePassword";
+import { InfoProduct } from "./pages/InfoProduct/InfoProduct";
+import ProfileUser from "./pages/ProfileUser/ProfileUser";
 
 const AppRouter: React.FC<{}> = () => {
   return (
@@ -16,6 +18,8 @@ const AppRouter: React.FC<{}> = () => {
         <Route path="/restorePassword" element={<RestorePassword />} />
         <Route path="/dashboard" element={<DashBoard/>} />
         <Route path="/marketCar" element={<MarketCar />} />
+        <Route path="/product/:id" element={<InfoProduct />} />
+        <Route path="/profile" element={<ProfileUser/>}/>
         <Route path="*" element={<div>404</div>} />
       </Route>
     </Routes>
