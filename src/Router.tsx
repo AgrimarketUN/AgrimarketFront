@@ -2,12 +2,12 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { RouterLayout } from "./common";
 import { NavBar } from "./common";
-import { ForgotPassword, Login, SignUp, MarketCar, DashBoard} from "@/pages";
-import RestorePassword from "./pages/RestorePassword/RestorePassword";
+import { ForgotPassword, Login, SignUp, MarketCar, DashBoard, RestorePassword} from "@/pages";
+import { RoutesNotFound } from "./utils";
 
 const AppRouter: React.FC<{}> = () => {
   return (
-    <Routes>
+    <RoutesNotFound>
       <Route path="/" element={<RouterLayout />}>
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
@@ -18,7 +18,7 @@ const AppRouter: React.FC<{}> = () => {
         <Route path="/marketCar" element={<MarketCar />} />
         <Route path="*" element={<div>404</div>} />
       </Route>
-    </Routes>
+    </RoutesNotFound>
   );
 };
 export default AppRouter;
