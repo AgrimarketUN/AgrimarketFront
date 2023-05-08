@@ -25,10 +25,11 @@ const DashBoard: React.FC<{}> = () => {
       });
   }, []);
 
-  
-  return <PrivateGrid>
-    <ProductsGrid products={products} />
-  </PrivateGrid>;
+  return (
+    <PrivateGrid>
+      <ProductsGrid products={products} />
+    </PrivateGrid>
+  );
 };
 
 export default DashBoard;

@@ -97,7 +97,7 @@ const LoginPage: React.FC<LoginProps> = () => {
           value={formValues.password}
           onChange={handleChange}
         />
-        <StyledTextButton onClick={() => navigate("forgotPassword")}>
+        <StyledTextButton onClick={() => navigate("forgotPassword", {replace: true})}>
           ¿Olvidó su password?
         </StyledTextButton>
         <StyledButton variant="contained" type="submit" name="login">
@@ -109,7 +109,7 @@ const LoginPage: React.FC<LoginProps> = () => {
         <StyledButton variant="contained" type="submit" name="facebook">
           Continuar con Facebook
         </StyledButton>
-        <StyledTextButton onClick={() => navigate("signup")}>
+        <StyledTextButton onClick={() => navigate("signup", {replace: true})}>
           Registro
         </StyledTextButton>
       </FormWrapper>

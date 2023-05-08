@@ -10,9 +10,12 @@ import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
+import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -55,6 +58,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const NavBar: React.FC<{}> = () => {
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const isMenuOpen = Boolean(anchorEl);
@@ -65,6 +69,15 @@ const NavBar: React.FC<{}> = () => {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleLogOut = () => {
+    sessionStorage.clear();
+    navigate("/", { replace: true });
+  };
+
+  const handleProfile = () => {
+    navigate("profile", { replace: true });
   };
 
   const menuId = "primary-search-account-menu";
@@ -84,8 +97,9 @@ const NavBar: React.FC<{}> = () => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleProfile}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleLogOut}>Logout</MenuItem>
     </Menu>
   );
 
@@ -93,7 +107,7 @@ const NavBar: React.FC<{}> = () => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
+          {/*<IconButton
             size="large"
             edge="start"
             color="inherit"
@@ -101,20 +115,32 @@ const NavBar: React.FC<{}> = () => {
             sx={{ mr: 2 }}
           >
             <MenuIcon />
-          </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
+            </IconButton>*/}
+          <Button 
+            onClick={() => navigate("/", { replace: true })}
+            style={
+              {
+                color: "white",
+                boxShadow: "none",
+                backgroundColor: "transparent",
+              }
+            }
           >
             AgriMarket
-          </Typography>
+          </Button>
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <IconButton
               size="large"
-              aria-label="show 4 new mails"
               color="inherit"
             >
               <Badge badgeContent={4} color="error">
@@ -123,8 +149,8 @@ const NavBar: React.FC<{}> = () => {
             </IconButton>
             <IconButton
               size="large"
-              aria-label="show 17 new notifications"
               color="inherit"
+              onClick={() => navigate("marketCar", { replace: true })}
             >
               <Badge badgeContent={0} color="error">
                 <ShoppingCartIcon />

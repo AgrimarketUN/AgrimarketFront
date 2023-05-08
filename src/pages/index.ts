@@ -2,6 +2,7 @@ export { default as ProductsGrid } from './Private/DashBoard/Components/Products
 export { default as DashBoard } from './Private/DashBoard/DashBoard';
 export { default as MarketCar } from './Private/MarketCar/MarketCar';
 export { default as Private } from './Private/Private';
+export { default as Profile } from './Private/Profile/Profile';
 export { default as ForgotPassword } from './Public/ForgotPassword/ForgotPassword';
 export * from './Public/ForgotPassword/utils/forgotPasswordValidationSchema';
 export { default as Login } from './Public/Login/Login';

@@ -1,12 +1,13 @@
+import { PrivateGrid } from '@/common';
 import React from 'react';
 
 export interface MarketCarProps {};
 
 const MarketCar: React.FC<MarketCarProps> = () => {
   return (
-    <div>
+    <PrivateGrid>
       <h1>MarketCar</h1>
-    </div>
+    </PrivateGrid>
   )
 };
 
