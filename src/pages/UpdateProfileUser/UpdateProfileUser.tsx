@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom";
-import { Box, Container, Grid, Typography, Button } from '@mui/material'
+import { Box, Container,  Grid, Typography, Button, TextField } from '@mui/material'
 
 
 
@@ -8,7 +8,7 @@ const ProfileUser: React.FC = () => {
     const navigate = useNavigate();
     return (
         <div>
-            <h1>Mi Perfil</h1>
+            <h1>Actualizar Perfil</h1>
 
             <Box sx={{ width: "100%" }}>
                 <Container maxWidth="xl">
@@ -26,28 +26,25 @@ const ProfileUser: React.FC = () => {
                             <Typography sx={{ mb: '1rem' }}>{"correo@domiio.com"}</Typography>
 
                             <Typography sx={{ fontWeight: 'bold', fontSize: 'h5.fontSize' }}>{"Dirección"}</Typography>
-                            <Typography sx={{ mb: '1rem' }}>{"Cll/Cra #"}</Typography>
+                            <TextField sx={{ mb: '1rem' }} id="standard-basic" variant="standard" defaultValue="Cll/Cra ..."/>
 
                             <Typography sx={{ fontWeight: 'bold', fontSize: 'h5.fontSize' }}>{"Teléfono"}</Typography>
-                            <Typography sx={{ mb: '1rem' }}>{"3..."}</Typography>
-
+                            <TextField sx={{ mb: '1rem' }} id="standard-basic" variant="standard" type="number" inputProps={{inputMode: 'numeric', pattern: '[0-9]*' }} defaultValue="300000000"/>
 
                         </Grid>
 
                     </Grid>
                     <Grid sx={{ mt: 2 }} container columnSpacing={2}>
                         <Grid item xs={6} >
-                            <Button variant="contained" onClick={() => navigate("/updateProfile")}>Actualizar datos</Button>
+                            <Button variant="contained">Cambiar foto</Button>
                         </Grid>
 
                         <Grid item xs={6} sx={{ textAlign: 'left' }}>
-                            <Button variant="contained" onClick={() => navigate("/forgotPassword")}>Cambiar contraseña</Button>
+                            <Button variant="contained">Actualizar datos</Button>
                         </Grid>
 
 
                     </Grid>
-
-
                 </Container>
             </Box>
         </div>

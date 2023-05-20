@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, Container, Grid, Typography, Button, Autocomplete, TextField, IconButton, TableContainer, Paper, Table, TableHead, TableRow, TableCell } from '@mui/material'
+import { Box, Container, Grid, Typography, Button, Autocomplete, TextField, IconButton} from '@mui/material'
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
@@ -29,18 +29,18 @@ export const InfoProduct: React.FC = () => {
       <Box sx={{ width: "100%" }}>
         <Container sx={{ width: "100%", textAlign: 'left' }}>
 
-          <Grid sx={{ mt: 2 }} container columnSpacing={2}>
-            <Grid item xs={6} >
-              <img src={"http://www.cyberscriptsolutions.com/wp-content/uploads/2017/10/default_product_icon.png"} style={{ width: "100%", borderRadius: "0.5em" }} />
+          <Grid container columnSpacing={2}>
+            <Grid item xs={7} >
+              <img src={"http://www.cyberscriptsolutions.com/wp-content/uploads/2017/10/default_product_icon.png"} style={{ width: "90%", borderRadius: "0.5em" }} />
 
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={5}>
               <Typography sx={{ fontWeight: 'bold', fontSize: 'h5.fontSize', mb: '1rem' }}>{"Nombre_Producto"}</Typography>
               <Typography sx={{ fontSize: 'h6.fontSize', mb: '2rem' }}>{"$Precio"}</Typography>
 
               <Grid sx={{ mt: 3 }} container columnSpacing={3}>
                 <Grid item xs={2} p={0}><IconButton onClick={decrementCount} disabled={count === 0} aria-label="removeCircle"><RemoveCircleIcon /></IconButton></Grid>
-                <Grid item xs={4} p={0} sx={{ mb: '2rem' }}><TextField label={"Cantidad"} value={count} variant="outlined" /></Grid>
+                <Grid item xs={3} p={0} sx={{mb: '2rem' }}><TextField label={"Cantidad"} value={count} variant="outlined"/></Grid>
                 <Grid item xs={2} p={0}><IconButton onClick={incrementCount} aria-label="addCircle"><AddCircleIcon /></IconButton></Grid>
               </Grid>
 
