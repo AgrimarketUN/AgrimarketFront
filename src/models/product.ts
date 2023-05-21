@@ -11,7 +11,7 @@ export interface Product {
 	unit?: string;
 	weight?: number;
 	cultivationMethod?: string;
-	organicCertifications?: string;
+	organicCertifications?: boolean;
 	categoryId: number;
 	storeId: number;
 	state: boolean;

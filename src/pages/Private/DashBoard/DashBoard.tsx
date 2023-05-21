@@ -1,33 +1,27 @@
-import React, { useState } from "react";
-import { api } from "@/common";
-import { get } from "@/services";
+import React from "react";
 import { PrivateGrid } from "@/common";
-import { Product } from "@/models/product";
 import ProductsGrid from "./Components/ProductsGrid";
+import { Grid } from "@mui/material";
+import FiltersCard from "./Components/FiltersCard";
+import { useSelector } from "react-redux";
+import { AppStore } from "@/models";
+import { fetchProducts } from "./Utils/fetchProducts";
 
 const DashBoard: React.FC<{}> = () => {
-  const [products, setProducts] = useState<Product[]>([]);
+  const filters = useSelector((state: AppStore) => state.filters);
 
-  const getProducts = async () => {
-    const data = await get(api.getproducts);
-    return data.Products as Product[];
-  };
-
-  React.useEffect(() => {
-    const promise = getProducts();
-
-    promise
-      .then((data) => {
-        setProducts((prevProducts) => [...prevProducts, ...data]);
-      })
-      .catch((e) => {
-        console.error(e);
-      });
-  }, []);
+  React.useEffect(() => fetchProducts(filters), [filters]);
 
   return (
     <PrivateGrid>
-      <ProductsGrid products={products} />
+      <Grid container spacing={2}>
+        <Grid item xs={2}>
+          <FiltersCard />
+        </Grid>
+        <Grid item xs={10}>
+          <ProductsGrid />
+        </Grid>
+      </Grid>
     </PrivateGrid>
   );
 };

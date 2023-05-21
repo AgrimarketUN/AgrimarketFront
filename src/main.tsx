@@ -4,9 +4,13 @@ import App from "./App";
 import "./index.css";
 import { AxiosInterceptor } from "@/interceptors";
 import { layoutContainer } from "@/styled-components";
+import { Provider } from "react-redux";
+import { store } from "@/redux";
 
-//AxiosInterceptor();
+AxiosInterceptor();
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <App />
+  <Provider store={store}>
+      <App />
+  </Provider>
 );

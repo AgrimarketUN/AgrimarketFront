@@ -44,7 +44,7 @@ const SignUpPage: React.FC<SignUpProps> = () => {
           const response = await post(api.register, formValues);
         };
         fetchAuth().then(() => {
-          navigate("/", { replace: true });
+          navigate("/");
         });
       })
       .catch((error) => {

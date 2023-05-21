@@ -4,20 +4,22 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { clearUser } from "@/redux/states/userState";
+import { clearFilters, setFilters } from "@/redux/states/filtersState";
 
-const Search = styled("div")(({ theme }) => ({
+const SearchDiv = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
@@ -59,9 +61,32 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const NavBar: React.FC<{}> = () => {
   const navigate = useNavigate();
+  const dispatcher = useDispatch();
+
+  const [Search, setSearch] = React.useState<string>("");
+
+  const [cartItems, setCartItems] = React.useState<number>(0);
+
+  const [messages, setMessages] = React.useState<number>(0);
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const isMenuOpen = Boolean(anchorEl);
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.target.value);
+  };
+
+  const handleSearchSubmit = () => {
+    navigate("/dashboard");
+    dispatcher(setFilters({ Search }));
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter") {
+      handleSearchSubmit();
+    }
+  };
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -72,12 +97,18 @@ const NavBar: React.FC<{}> = () => {
   };
 
   const handleLogOut = () => {
+    dispatcher(clearUser());
     sessionStorage.clear();
-    navigate("/", { replace: true });
+    navigate("/");
   };
 
   const handleProfile = () => {
-    navigate("profile", { replace: true });
+    navigate("/profile");
+  };
+
+  const handleLogo = () => {
+    dispatcher(clearFilters());
+    navigate("/dashboard");
   };
 
   const menuId = "primary-search-account-menu";
@@ -116,43 +147,44 @@ const NavBar: React.FC<{}> = () => {
           >
             <MenuIcon />
             </IconButton>*/}
-          <Button 
-            onClick={() => navigate("/", { replace: true })}
-            style={
-              {
-                color: "white",
-                boxShadow: "none",
-                backgroundColor: "transparent",
-              }
-            }
+          <Button
+            onClick={handleLogo}
+            style={{
+              color: "white",
+              boxShadow: "none",
+              backgroundColor: "transparent",
+            }}
           >
             AgriMarket
           </Button>
-          <Search>
-            <SearchIconWrapper>
+          <SearchDiv>
+            <IconButton
+              sx={{ color: "white" }}
+              aria-label="Send-search"
+              onClick={handleSearchSubmit}
+            >
               <SearchIcon />
-            </SearchIconWrapper>
+            </IconButton>
             <StyledInputBase
               placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
+              inputProps={{ "aria-label": "search" }}
+              onChange={handleSearch}
+              onKeyDown={handleKeyDown}
             />
-          </Search>
+          </SearchDiv>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <IconButton
-              size="large"
-              color="inherit"
-            >
-              <Badge badgeContent={4} color="error">
+            <IconButton size="large" color="inherit">
+              <Badge badgeContent={messages} color="error">
                 <MailIcon />
               </Badge>
             </IconButton>
             <IconButton
               size="large"
               color="inherit"
-              onClick={() => navigate("marketCar", { replace: true })}
+              onClick={() => navigate("/shoppingCart")}
             >
-              <Badge badgeContent={0} color="error">
+              <Badge badgeContent={cartItems} color="error">
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>

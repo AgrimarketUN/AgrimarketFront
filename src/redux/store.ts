@@ -1,13 +1,13 @@
-import { UserInfo } from "@/models";
+import { AppStore} from "@/models";
 import { configureStore } from "@reduxjs/toolkit";
-import { userSlice } from "./states/user";
+import { userSlice } from "./states/userState";
+import { shoppingCartSlice } from "./states/shoppingCartState";
+import { filtersSlice } from "./states/filtersState";
 
-export interface AppStore {
-  user: UserInfo;
-};
-
-export default configureStore<AppStore>({
-  reducer: {
-    user: userSlice.reducer
-  }
+const Store = configureStore<AppStore>({
+  reducer:{user: userSlice.reducer,
+  shoppingCart: shoppingCartSlice.reducer,
+  filters: filtersSlice.reducer,}
 });
+
+export default Store;
