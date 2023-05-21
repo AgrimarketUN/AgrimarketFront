@@ -8,6 +8,7 @@ import { InfoProduct } from "./pages/InfoProduct/InfoProduct";
 import ProfileUser from "./pages/ProfileUser/ProfileUser";
 import UpdateProfileUser from "./pages/UpdateProfileUser/UpdateProfileUser";
 import { Purchase } from "./pages/Purchase/Purchase";
+import { MarketCarProps } from "./pages/MarketCart/MarketCart";
 
 const AppRouter: React.FC<{}> = () => {
   return (

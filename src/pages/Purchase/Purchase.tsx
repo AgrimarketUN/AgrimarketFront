@@ -1,5 +1,6 @@
 import React from 'react'
 import { Box, Container, Grid, Typography, Button, Autocomplete, TextField, IconButton } from '@mui/material'
+import { Buy } from '@/components/Buy/Buy'
 
 export const Purchase: React.FC = () => {
     return (
@@ -10,7 +11,8 @@ export const Purchase: React.FC = () => {
 
                     <Grid container spacing={2}>
                         <Grid item xs={8} >
-                            Cards de productos en el carrito
+                            <Buy/>
+                            <Buy/>
                         </Grid>
                         <Grid item xs={4}>
 

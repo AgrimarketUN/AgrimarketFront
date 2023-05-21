@@ -38,7 +38,7 @@ export const InfoProduct: React.FC = () => {
               <Typography sx={{ fontWeight: 'bold', fontSize: 'h5.fontSize', mb: '1rem' }}>{"Nombre_Producto"}</Typography>
               <Typography sx={{ fontSize: 'h6.fontSize', mb: '2rem' }}>{"$Precio"}</Typography>
 
-              <Grid sx={{ mt: 3 }} container columnSpacing={3}>
+              <Grid container columnSpacing={3}>
                 <Grid item xs={2} p={0}><IconButton onClick={decrementCount} disabled={count === 0} aria-label="removeCircle"><RemoveCircleIcon /></IconButton></Grid>
                 <Grid item xs={3} p={0} sx={{mb: '2rem' }}><TextField label={"Cantidad"} value={count} variant="outlined"/></Grid>
                 <Grid item xs={2} p={0}><IconButton onClick={incrementCount} aria-label="addCircle"><AddCircleIcon /></IconButton></Grid>
