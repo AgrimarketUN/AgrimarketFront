@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -18,6 +18,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { clearUser } from "@/redux/states/userState";
 import { clearFilters, setFilters } from "@/redux/states/filtersState";
+import { useSelector } from "react-redux";
+import { AppStore } from "@/models";
 
 const SearchDiv = styled("div")(({ theme }) => ({
   position: "relative",
@@ -63,9 +65,11 @@ const NavBar: React.FC<{}> = () => {
   const navigate = useNavigate();
   const dispatcher = useDispatch();
 
-  const [Search, setSearch] = React.useState<string>("");
+  const shoppingCartLength = useSelector((state: AppStore) => Object.keys(state.shoppingCart).length);
 
-  const [cartItems, setCartItems] = React.useState<number>(0);
+  const shoppingCart = useSelector((state: AppStore) => state.shoppingCart);
+
+  const [Search, setSearch] = React.useState<string>("");
 
   const [messages, setMessages] = React.useState<number>(0);
 
@@ -110,6 +114,11 @@ const NavBar: React.FC<{}> = () => {
     dispatcher(clearFilters());
     navigate("/dashboard");
   };
+
+  useEffect(() => {
+    console.log("shopping cart:",shoppingCart);
+  }, [shoppingCart]);
+
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -184,7 +193,7 @@ const NavBar: React.FC<{}> = () => {
               color="inherit"
               onClick={() => navigate("/shoppingCart")}
             >
-              <Badge badgeContent={cartItems} color="error">
+              <Badge badgeContent={shoppingCartLength} color="error">
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>

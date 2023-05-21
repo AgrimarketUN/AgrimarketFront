@@ -1,5 +1,3 @@
-import { item } from "./item";
-
-export interface shoppingCart {
-  "items": item[],
+export type shoppingCart = {
+  [productId: number]: [quantity: number],
 }

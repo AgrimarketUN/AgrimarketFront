@@ -7,7 +7,7 @@ export interface Product {
 	origin?: string;
 	expiryDate?: Date;
 	harvestDate?: Date;
-	availableQuantity?: number;
+	availableQuantity: number;
 	unit?: string;
 	weight?: number;
 	cultivationMethod?: string;

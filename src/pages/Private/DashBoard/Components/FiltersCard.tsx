@@ -1,8 +1,4 @@
-import {
-  ProductsFilters,
-  categories,
-  orderBy,
-} from "@/models";
+import { ProductsFilters, categories, orderBy } from "@/models";
 import {
   Autocomplete,
   Button,
@@ -17,14 +13,17 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { EmptyFiltersState, clearFilters, setFilters as setFiltersStore } from "@/redux/states/filtersState";
+import {
+  EmptyFiltersState,
+  clearFilters,
+  setFilters as setFiltersStore,
+} from "@/redux/states/filtersState";
 import { useNavigate } from "react-router-dom";
 import { fetchProducts } from "../Utils/fetchProducts";
 
 interface FiltterCardProps {}
 
 const FiltersCard: React.FC<FiltterCardProps> = () => {
-  const navegate = useNavigate();
   const dispatch = useDispatch();
   const [filters, setFilters] = useState<ProductsFilters>({
     Organic: false,
@@ -65,23 +64,27 @@ const FiltersCard: React.FC<FiltterCardProps> = () => {
 
   return (
     <Card sx={{ maxWidth: 200 }}>
-      <Typography
-        sx={{ fontSize: 14 }}
-        component="div"
-        align="left"
-        fontWeight="bold"
-      >
-        Ordenar por
-      </Typography>
-      <Autocomplete
-        onChange={(event, newValue) => handleChange(event, newValue, "OrderBy")}
-        sx={{ height: 50 }}
-        id="categories-box"
-        size="small"
-        options={orderBy}
-        renderInput={(params) => <TextField {...params} placeholder="Todas" />}
-      />
       <form onSubmit={submitFilters}>
+        <Typography
+          sx={{ fontSize: 14 }}
+          component="div"
+          align="left"
+          fontWeight="bold"
+        >
+          Ordenar por
+        </Typography>
+        <Autocomplete
+          onChange={(event, newValue) =>
+            handleChange(event, newValue, "OrderBy")
+          }
+          sx={{ height: 50 }}
+          id="categories-box"
+          size="small"
+          options={orderBy}
+          renderInput={(params) => (
+            <TextField {...params} placeholder="Todas" />
+          )}
+        />
         <Typography
           sx={{ fontSize: 14 }}
           component="div"
@@ -148,21 +151,21 @@ const FiltersCard: React.FC<FiltterCardProps> = () => {
             startAdornment={<InputAdornment position="start">$</InputAdornment>}
           />
         </FormControl>
-        <Button variant="contained" size="small" type="submit" >
+        <Button variant="contained" size="small" type="submit">
           Filtrar
         </Button>
         <Button
-            onClick={clearAllFilters}
-            style={{
-              padding: 5,
-              fontSize: 11,
-              color: "black",
-              boxShadow: "none",
-              backgroundColor: "transparent",
-            }}
-          >
-            Limpiar filtros
-          </Button>
+          onClick={clearAllFilters}
+          style={{
+            padding: 5,
+            fontSize: 11,
+            color: "black",
+            boxShadow: "none",
+            backgroundColor: "transparent",
+          }}
+        >
+          Limpiar filtros
+        </Button>
       </form>
     </Card>
   );

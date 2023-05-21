@@ -1,6 +1,5 @@
 export * from './appStore';
 export * from './categories';
-export * from './item';
 export * from './product';
 export * from './productsFilters';
 export * from './routes';

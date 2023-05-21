@@ -1,9 +1,7 @@
-import { shoppingCart, item } from "@/models";
+import { shoppingCart } from "@/models";
 import { createSlice } from "@reduxjs/toolkit";
 
-export const EmptyShoppingCartState: shoppingCart = {
-  items: [],
-};
+export const EmptyShoppingCartState: shoppingCart = {};
 
 export const shoppingCartSlice = createSlice({
   name: "shoppingCart",
@@ -11,20 +9,27 @@ export const shoppingCartSlice = createSlice({
   reducers: {
     setShoppingCart: (state, action) => action.payload,
     addItem: (state, action) => {
-      state.items.push(action.payload);
+      const stateQuantity = state[action.payload.productId];
+      const quantity = action.payload.quantity;
+      const sum = stateQuantity + quantity;
+      const stock = action.payload.stock;
+      if (
+        !!stateQuantity &&
+        quantity > 0 &&
+        sum <= stock
+      ) {
+        state[action.payload.productId] += quantity;
+        return;
+      } else if ( sum > stock || quantity > stock || quantity <= 0) {
+        return;
+      }
+      state[action.payload.productId] = action.payload.quantity;
     },
     removeItem: (state, action) => {
-      state.items = state.items.filter(
-        (item: item) => item.product.id !== action.payload
-      );
+      delete state[action.payload.productId];
     },
     updateItemQuantity: (state, action) => {
-      const itemIndex = state.items.findIndex(
-        (item: item) => item.product.id === action.payload.id
-      );
-      if (itemIndex !== -1) {
-        state.items[itemIndex].quantity = action.payload.quantity;
-      }
+      state[action.payload.productId] = action.payload.quantity;
     },
     clearShoppingCart: () => EmptyShoppingCartState,
   },
