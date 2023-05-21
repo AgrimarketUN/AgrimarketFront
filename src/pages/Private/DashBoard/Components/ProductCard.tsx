@@ -31,7 +31,11 @@ function ProductCard({ product }: { product: ProductInterface }) {
     navigate(`/product/${product.id}`);
   };
 
-  const handleAddToCart = (productId: number, quantity: number, stock: number) => {
+  const handleAddToCart = (
+    productId: number,
+    quantity: number,
+    stock: number
+  ) => {
     addProduct(productId, quantity, stock, dispatch);
   };
 

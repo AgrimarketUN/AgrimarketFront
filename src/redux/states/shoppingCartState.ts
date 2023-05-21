@@ -13,14 +13,10 @@ export const shoppingCartSlice = createSlice({
       const quantity = action.payload.quantity;
       const sum = stateQuantity + quantity;
       const stock = action.payload.stock;
-      if (
-        !!stateQuantity &&
-        quantity > 0 &&
-        sum <= stock
-      ) {
+      if (!!stateQuantity && quantity > 0 && sum <= stock) {
         state[action.payload.productId] += quantity;
         return;
-      } else if ( sum > stock || quantity > stock || quantity <= 0) {
+      } else if (sum > stock || quantity > stock || quantity <= 0) {
         return;
       }
       state[action.payload.productId] = action.payload.quantity;

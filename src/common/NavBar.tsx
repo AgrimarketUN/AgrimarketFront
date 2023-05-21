@@ -65,7 +65,9 @@ const NavBar: React.FC<{}> = () => {
   const navigate = useNavigate();
   const dispatcher = useDispatch();
 
-  const shoppingCartLength = useSelector((state: AppStore) => Object.keys(state.shoppingCart).length);
+  const shoppingCartLength = useSelector(
+    (state: AppStore) => Object.keys(state.shoppingCart).length
+  );
 
   const shoppingCart = useSelector((state: AppStore) => state.shoppingCart);
 
@@ -116,9 +118,8 @@ const NavBar: React.FC<{}> = () => {
   };
 
   useEffect(() => {
-    console.log("shopping cart:",shoppingCart);
+    console.log("shopping cart:", shoppingCart);
   }, [shoppingCart]);
-
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
