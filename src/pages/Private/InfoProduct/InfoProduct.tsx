@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Box, Container, Grid, Typography, Button, Autocomplete, TextField, IconButton} from '@mui/material'
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import { PrivateGrid } from '@/common';
 
 
 export const InfoProduct: React.FC = () => {
@@ -25,7 +26,7 @@ export const InfoProduct: React.FC = () => {
   ];
 
   return (
-    <div>
+    <PrivateGrid>
       <Box sx={{ width: "100%" }}>
         <Container sx={{ width: "100%", textAlign: 'left' }}>
 
@@ -101,7 +102,7 @@ export const InfoProduct: React.FC = () => {
 
         </Container>
       </Box>
-    </div>
+    </PrivateGrid>
   )
 }
 
