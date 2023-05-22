@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { HomeGrid } from "@/components";
 import { TextField } from "@mui/material";
-import { FormWrapper, StyledButton, StyledTextButton } from "@/common";
+import { FormWrapper, StyledButton, StyledTextButton, api } from "@/common";
 import { useNavigate } from "react-router-dom";
 import resetPasswordValidationSchema from "./utils/resetPasswordValidationSchema";
-import { post } from "@/services";
+import { put } from "@/services";
 
 export interface ResetPasswordProps {}
 
@@ -41,7 +41,7 @@ const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
       console.log("Validación correcta", formvalues);
       const resetPassword = async () => {
         try {
-          const response = await post("reset-password", formvalues);
+          const response = await put(api.resetpassword, formvalues);
           console.log(response);
           setShowMessage(true);
         } catch (error) {

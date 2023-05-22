@@ -18,8 +18,8 @@ import {
   clearFilters,
   setFilters as setFiltersStore,
 } from "@/redux/states/filtersState";
-import { useNavigate } from "react-router-dom";
 import { fetchProducts } from "../Utils/fetchProducts";
+import { Stack } from "@mui/system";
 
 interface FiltterCardProps {}
 
@@ -65,107 +65,121 @@ const FiltersCard: React.FC<FiltterCardProps> = () => {
   return (
     <Card sx={{ maxWidth: 200 }}>
       <form onSubmit={submitFilters}>
-        <Typography
-          sx={{ fontSize: 14 }}
-          component="div"
-          align="left"
-          fontWeight="bold"
-        >
-          Ordenar por
-        </Typography>
-        <Autocomplete
-          onChange={(event, newValue) =>
-            handleChange(event, newValue, "OrderBy")
-          }
-          sx={{ height: 50 }}
-          id="categories-box"
-          size="small"
-          options={orderBy}
-          renderInput={(params) => (
-            <TextField {...params} placeholder="Todas" />
-          )}
-        />
-        <Typography
-          sx={{ fontSize: 14 }}
-          component="div"
-          align="left"
-          fontWeight="bold"
-        >
-          Categoría
-        </Typography>
-        <Autocomplete
-          onChange={(event, newValue) =>
-            handleChange(event, newValue, "Category")
-          }
-          sx={{ height: 50 }}
-          id="categories-box"
-          size="small"
-          options={categories}
-          renderInput={(params) => (
-            <TextField name="Category" {...params} placeholder="Todas" />
-          )}
-        />
-        <Typography
-          sx={{ fontSize: 14 }}
-          component="div"
-          align="left"
-          fontWeight="bold"
-        >
-          Certificación orgánica
-        </Typography>
-        <Switch
-          onChange={handleOrganic}
-          checked={filters.Organic}
-          name="Organic"
-          inputProps={{ "aria-label": "controlled" }}
-        />
-        <Typography
-          sx={{ fontSize: 14 }}
-          component="div"
-          align="left"
-          fontWeight="bold"
-        >
-          Precio
-        </Typography>
-        <FormControl fullWidth sx={{ m: 1 }} variant="standard">
-          <InputLabel htmlFor="price-min">Mínimo</InputLabel>
-          <Input
-            onChange={(event) =>
-              handleChange(event, event.target.value, "PriceMin")
+        <Stack spacing={2} sx={{ p: 2 }}>
+          <div>
+          <Typography
+            sx={{ fontSize: 14 }}
+            component="div"
+            align="left"
+            fontWeight="bold"
+          >
+            Ordenar por
+          </Typography>
+          <Autocomplete
+            onChange={(event, newValue) =>
+              handleChange(event, newValue, "OrderBy")
             }
-            name="PriceMin"
-            id="PriceMin"
-            type="number"
-            startAdornment={<InputAdornment position="start">$</InputAdornment>}
+            sx={{ height: 50 }}
+            id="categories-box"
+            size="small"
+            options={orderBy}
+            renderInput={(params) => (
+              <TextField {...params} placeholder="Todas" />
+            )}
           />
-        </FormControl>
-        <FormControl fullWidth sx={{ m: 1 }} variant="standard">
-          <InputLabel htmlFor="price-max">Máximo</InputLabel>
-          <Input
-            onChange={(event) =>
-              handleChange(event, event.target.value, "PriceMax")
+          </div>
+          <div>
+          <Typography
+            sx={{ fontSize: 14 }}
+            component="div"
+            align="left"
+            fontWeight="bold"
+          >
+            Categoría
+          </Typography>
+          <Autocomplete
+            onChange={(event, newValue) =>
+              handleChange(event, newValue, "Category")
             }
-            name="PriceMax"
-            id="price-max"
-            type="number"
-            startAdornment={<InputAdornment position="start">$</InputAdornment>}
+            sx={{ height: 50 }}
+            id="categories-box"
+            size="small"
+            options={categories}
+            renderInput={(params) => (
+              <TextField name="Category" {...params} placeholder="Todas" />
+            )}
           />
-        </FormControl>
-        <Button variant="contained" size="small" type="submit">
-          Filtrar
-        </Button>
-        <Button
-          onClick={clearAllFilters}
-          style={{
-            padding: 5,
-            fontSize: 11,
-            color: "black",
-            boxShadow: "none",
-            backgroundColor: "transparent",
-          }}
-        >
-          Limpiar filtros
-        </Button>
+          </div>
+          <div>
+          <Typography
+            sx={{ fontSize: 14 }}
+            component="div"
+            align="left"
+            fontWeight="bold"
+          >
+            Certificación orgánica
+          </Typography>
+          <Switch
+            onChange={handleOrganic}
+            checked={filters.Organic}
+            name="Organic"
+            inputProps={{ "aria-label": "controlled" }}
+          />
+          </div>
+          <div>
+          <Typography
+            sx={{ fontSize: 14 }}
+            component="div"
+            align="left"
+            fontWeight="bold"
+          >
+            Precio
+          </Typography>
+          <FormControl fullWidth sx={{ m: 1 }} variant="standard">
+            <InputLabel htmlFor="price-min">Mínimo</InputLabel>
+            <Input
+              onChange={(event) =>
+                handleChange(event, event.target.value, "PriceMin")
+              }
+              name="PriceMin"
+              id="PriceMin"
+              type="number"
+              startAdornment={
+                <InputAdornment position="start">$</InputAdornment>
+              }
+            />
+          </FormControl>
+          <FormControl fullWidth sx={{ m: 1 }} variant="standard">
+            <InputLabel htmlFor="price-max">Máximo</InputLabel>
+            <Input
+              onChange={(event) =>
+                handleChange(event, event.target.value, "PriceMax")
+              }
+              name="PriceMax"
+              id="price-max"
+              type="number"
+              startAdornment={
+                <InputAdornment position="start">$</InputAdornment>
+              }
+            />
+          </FormControl>
+          </div>
+          <Button variant="contained" size="small" type="submit">
+            Filtrar
+          </Button>
+          <Button
+            onClick={clearAllFilters}
+            style={{
+              padding: 5,
+              fontSize: 11,
+              color: "black",
+              boxShadow: "none",
+              backgroundColor: "transparent",
+            }}
+          >
+            Limpiar filtros
+          </Button>
+        </Stack>
       </form>
     </Card>
   );

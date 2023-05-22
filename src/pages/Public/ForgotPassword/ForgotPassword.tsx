@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { HomeGrid } from "@/components";
 import { TextField } from "@mui/material";
-import { FormWrapper, StyledButton, StyledTextButton } from "@/common";
+import { FormWrapper, StyledButton, StyledTextButton, api } from "@/common";
 import { useNavigate } from "react-router-dom";
 import { forgotPasswordValidationSchema } from "./utils/forgotPasswordValidationSchema";
 import { post } from "@/services";
@@ -37,7 +37,7 @@ const ForgotPasswordPage: React.FC<ForgotPasswordProps> = () => {
       .then((values) => {
         console.log("Validación correcta", values);
         const fetchResetPassword = async () => {
-          const response = await post("password/reset", values);
+          const response = await post(api.forgotpassword, values);
           console.log(response);
           setShowMessage(true); // Actualizar estado para mostrar mensaje
         };
@@ -54,7 +54,6 @@ const ForgotPasswordPage: React.FC<ForgotPasswordProps> = () => {
       <FormWrapper
         component="form"
         noValidate
-        autoComplete="off"
         className="childComponent"
         sx={{
           "& .MuiTextField-root": {

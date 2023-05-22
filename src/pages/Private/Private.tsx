@@ -1,8 +1,8 @@
 import { PrivateRoutes } from "@/models";
-import { RoutesNotFound } from "@/utils";
 import { Navigate, Route } from "react-router-dom";
 import DashBoard from "./DashBoard/DashBoard";
 import MarketCar from "./ShoppingCart/ShoppingCart";
+import { RoutesNotFound } from "@/components";
 
 function Private() {
   return (

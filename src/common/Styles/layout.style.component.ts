@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import background from "@/assets/Homebackground.svg";
 
 export const HomeWrapper = styled.div`
-  //background-image: url(${background});
+  background-image: url(${background});
   background-size: cover;
   background-repeat: no-repeat;
   height: 100%;

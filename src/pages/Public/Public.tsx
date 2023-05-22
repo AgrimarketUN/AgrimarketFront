@@ -1,7 +1,7 @@
 import { PublicRoutes } from "@/models";
-import { RoutesNotFound } from "@/utils";
 import { Navigate, Route } from "react-router-dom";
 import { ForgotPassword, Login, RestorePassword, SignUp } from "..";
+import { RoutesNotFound } from "@/components";
 
 function Public() {
   return (

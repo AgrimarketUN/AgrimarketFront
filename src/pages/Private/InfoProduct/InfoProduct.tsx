@@ -3,9 +3,15 @@ import { Box, Container, Grid, Typography, Button, Autocomplete, TextField, Icon
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { PrivateGrid } from '@/common';
+import { useParams } from 'react-router';
 
+interface InfoProductProps {
+  id: string;
+}
 
-export const InfoProduct: React.FC = () => {
+export const InfoProduct: React.FC<InfoProductProps> = () => {
+  const { id } = useParams();
+  console.log(id);
 
   const [count, setCount] = useState<number>(0);
 
@@ -97,9 +103,6 @@ export const InfoProduct: React.FC = () => {
               <Typography >{"Información certificaciones"}</Typography>
             </Grid>
           </Grid>
-          
-
-
         </Container>
       </Box>
     </PrivateGrid>

@@ -11,15 +11,12 @@ import {
 } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { Product as ProductInterface } from "@/models";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import addProduct from "@/utils/addProduct";
 import { useDispatch } from "react-redux";
 
 function ProductCard({ product }: { product: ProductInterface }) {
   const dispatch = useDispatch();
-
-  const navigate = useNavigate();
 
   const [quantity, setQuantity] = useState<number>(0);
 
@@ -28,7 +25,7 @@ function ProductCard({ product }: { product: ProductInterface }) {
   };
 
   const handleProductClick = () => {
-    navigate(`/product/${product.id}`);
+    window.open(`/product/${product.id}`, "_blank");
   };
 
   const handleAddToCart = (
