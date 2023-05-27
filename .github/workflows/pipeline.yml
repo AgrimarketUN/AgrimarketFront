@@ -54,7 +54,7 @@ jobs:
         git add .
         git commit -m "Add Docker image"
       env:
-        TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TOKEN: ${{ secrets.GIT_TOKEN }}
 
     - name: push changes to GitHub repository
     
@@ -65,5 +65,5 @@ jobs:
         ls
         git push https://${{ secrets.GIT_TOKEN }}@github.com/AgrimarketUN/AWS-Terraform-Pipeline.git
       env:
-        TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TOKEN: ${{ secrets.GIT_TOKEN }}
         
