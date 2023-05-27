@@ -26,3 +26,10 @@ jobs:
         push: true
         tags: psiquedelos/is2_front:latest
 
+    - name: Push to another repository
+      uses: ad-m/github-push-action@master
+      with:
+        repository: AgrimarketUN/AWS-Terraform-Pipeline
+        branch: main
+
+
