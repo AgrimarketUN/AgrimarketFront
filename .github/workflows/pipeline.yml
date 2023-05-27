@@ -41,9 +41,12 @@ jobs:
         pwd
         touch "a"
         ls -al
+        git init
+        git status
 
     - name: Commit to GitHub repository
       run: |   
+        pwd
         git add .
         git commit -m "Add Docker image"
 
