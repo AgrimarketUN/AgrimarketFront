@@ -31,15 +31,3 @@ jobs:
         git config --global user.name "GitHub Actions"
         git config --global user.email "actions@github.com"
 
-    - name: Clone GitHub repository
-      run: git clone https://github.com/AgrimarketUN/AWS-Terraform-Pipeline.git
-
-    - name: Move Docker image to GitHub repository
-      run: mv ./psiquedelos/is2_front:latest ./AWS-Terraform-Pipeline
-
-    - name: Commit and push changes to GitHub repository
-      run: |
-        cd AWS-Terraform-Pipeline
-        git add .
-        git commit -m "Add Docker image"
-        git push
