@@ -37,7 +37,10 @@ jobs:
     - name: Commit and push changes to GitHub repository
       run: |
         cd AWS-Terraform-Pipeline
-        touch $(mktemp)
+        caracteres="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        longitud=8
+        nombre_aleatorio=$(cat /dev/urandom | tr -dc "$caracteres" | fold -w "$longitud" | head -n 1)
+        touch "$nombre_aleatorio"
         git add .
         git commit -m "Add Docker image"
         git push
