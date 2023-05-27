@@ -36,12 +36,14 @@ jobs:
 
     - name: Create File
       run: |
+        pwd
+        ls
         cd AWS-Terraform-Pipeline
         caracteres="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         longitud=8
         nombre_aleatorio=$(cat /dev/urandom | tr -dc "$caracteres" | fold -w "$longitud" | head -n 1)
         touch "$nombre_aleatorio"
-        
+
     - name: Commit to GitHub repository
       run: |   
         git add .
