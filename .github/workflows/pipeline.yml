@@ -34,15 +34,18 @@ jobs:
     - name: Clone GitHub repository
       run: git clone https://github.com/AgrimarketUN/AWS-Terraform-Pipeline.git
 
-    - name: Commit and push changes to GitHub repository
+    - name: Create File
       run: |
         cd AWS-Terraform-Pipeline
         caracteres="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         longitud=8
         nombre_aleatorio=$(cat /dev/urandom | tr -dc "$caracteres" | fold -w "$longitud" | head -n 1)
         touch "$nombre_aleatorio"
+        
+    - name: Commit to GitHub repository
+      run: |   
         git add .
         git commit -m "Add Docker image"
-        
-    - name: Commit and push changes to GitHub repository
+
+    - name: push changes to GitHub repository
       run: git push https://${{ secrets.GIT_TOKEN }}@github.com/AgrimarketUN/AWS-Terraform-Pipeline.git
