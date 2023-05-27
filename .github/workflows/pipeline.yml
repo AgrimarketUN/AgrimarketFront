@@ -34,17 +34,17 @@ jobs:
         ssh-keyscan github.com >> ~/.ssh/known_hosts
 
     - name: Clone GitHub repository
-      run: git clone git@github.com:AgrimarketUN/AWS-Terraform-Pipeline.git
+      run: git clone git@github.com:AgrimarketUN/AWS-Terraform-Pipeline-Front.git
 
     - name: Configurar identidad de usuario en Git
       run: |
-        cd AWS-Terraform-Pipeline
+        cd AWS-Terraform-Pipeline-Front
         git config user.email "dmirandam@unal.edu.co"
         git config user.name "dmirandam"
 
     - name: Create File
       run: |
-        cd AWS-Terraform-Pipeline/logs
+        cd AWS-Terraform-Pipeline-Front/logs
         touch front-$(date +%Y%m%d%H%M%S)
         ls -al
         git init
