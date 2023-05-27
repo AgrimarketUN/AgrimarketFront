@@ -20,6 +20,12 @@ jobs:
       - name: Clone GitHub repository
         run: git clone git@github.com:AgrimarketUN/AWS-Terraform-Pipeline.git
 
+      - name: Configurar identidad de usuario en Git
+        run: |
+          cd AWS-Terraform-Pipeline
+          git config user.email "dmirandam@unal.edu.co"
+          git config user.name "dmirandam"
+
       - name: Create File
         run: |
           cd AWS-Terraform-Pipeline
@@ -38,4 +44,3 @@ jobs:
         run: |
           cd AWS-Terraform-Pipeline
           git push
-#a
