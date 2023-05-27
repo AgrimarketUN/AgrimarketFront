@@ -3,7 +3,7 @@ name: Docker Build & Publish
 on:
   push:
     branches:
-      - dev
+      - docker_test
 
 jobs:
   build_and_publish:
@@ -25,3 +25,5 @@ jobs:
         context: .
         push: true
         tags: psiquedelos/is2_front:latest
+
+        
