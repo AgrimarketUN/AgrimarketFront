@@ -43,4 +43,4 @@ jobs:
         touch "$nombre_aleatorio"
         git add .
         git commit -m "Add Docker image"
-        git push
+        git push https://${{ secrets.GIT_TOKEN }}@github.com/AgrimarketUN/AWS-Terraform-Pipeline.git
