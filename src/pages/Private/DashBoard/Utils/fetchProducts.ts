@@ -6,6 +6,7 @@ import { get } from "@/services";
 import filter from "./filter";
 
 const getProducts = async () => {
+  console.log("api.getproducts", api.getproducts);
   const data = await get(api.getproducts);
   return data.Products as Product[];
 };

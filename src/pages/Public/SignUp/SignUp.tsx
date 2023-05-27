@@ -54,85 +54,83 @@ const SignUpPage: React.FC<SignUpProps> = () => {
 
   return (
     <HomeGrid>
-      <FormWrapper
-        component="form"
-        noValidate
-        autoComplete="on"
-        className="childComponent"
-        sx={{
-          "& .MuiTextField-root": {
-            marginBottom: margin,
-            width: width,
-            height: height,
-          },
-          "& button": { marginBottom: margin },
-        }}
-        onSubmit={handleSubmit}
-      >
-        <TextField
-          id="firstname"
-          name="firstname"
-          label="Nombre"
-          type="text"
-          value={formValues.firstname}
-          onChange={handleChange}
-          variant="outlined"
-          required
-        />
-        <TextField
-          id="lastname"
-          name="lastname"
-          label="Apellido"
-          type="text"
-          value={formValues.lastname}
-          onChange={handleChange}
-          variant="outlined"
-          required
-        />
-        <TextField
-          id="email"
-          name="email"
-          label="Correo electrónico"
-          type="email"
-          variant="outlined"
-          value={formValues.email}
-          onChange={handleChange}
-          required
-        />
-        <TextField
-          id="password"
-          name="password"
-          label="Contraseña"
-          variant="outlined"
-          type="password"
-          value={formValues.password}
-          onChange={handleChange}
-          required
-        />
-        <TextField
-          id="address"
-          name="address"
-          label="Dirección"
-          type="text"
-          value={formValues.address}
-          onChange={handleChange}
-          variant="outlined"
-          required
-        />
-        <TextField
-          id="phone"
-          name="phone"
-          label="Teléfono"
-          type="number"
-          value={formValues.phone}
-          onChange={handleChange}
-          variant="outlined"
-          required
-        />
-        <StyledButton variant="contained" type="submit">
-          Crear cuenta
-        </StyledButton>
-      </FormWrapper>
+      <form onSubmit={handleSubmit} noValidate autoComplete="on">
+        <FormWrapper
+          className="childComponent"
+          sx={{
+            "& .MuiTextField-root": {
+              marginBottom: margin,
+              width: width,
+              height: height,
+            },
+            "& button": { marginBottom: margin },
+          }}
+        >
+          <TextField
+            id="firstname"
+            name="firstname"
+            label="Nombre"
+            type="text"
+            value={formValues.firstname}
+            onChange={handleChange}
+            variant="outlined"
+            required
+          />
+          <TextField
+            id="lastname"
+            name="lastname"
+            label="Apellido"
+            type="text"
+            value={formValues.lastname}
+            onChange={handleChange}
+            variant="outlined"
+            required
+          />
+          <TextField
+            id="email"
+            name="email"
+            label="Correo electrónico"
+            type="email"
+            variant="outlined"
+            value={formValues.email}
+            onChange={handleChange}
+            required
+          />
+          <TextField
+            id="password"
+            name="password"
+            label="Contraseña"
+            variant="outlined"
+            type="password"
+            value={formValues.password}
+            onChange={handleChange}
+            required
+          />
+          <TextField
+            id="address"
+            name="address"
+            label="Dirección"
+            type="text"
+            value={formValues.address}
+            onChange={handleChange}
+            variant="outlined"
+            required
+          />
+          <TextField
+            id="phone"
+            name="phone"
+            label="Teléfono"
+            type="number"
+            value={formValues.phone}
+            onChange={handleChange}
+            variant="outlined"
+            required
+          />
+          <StyledButton variant="contained" type="submit">
+            Crear cuenta
+          </StyledButton>
+        </FormWrapper>
+      </form>
     </HomeGrid>
   );
 };

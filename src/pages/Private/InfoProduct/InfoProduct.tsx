@@ -5,8 +5,7 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import { PrivateGrid } from '@/common';
 import { useParams } from 'react-router';
 
-interface InfoProductProps {
-  id: string;
+export interface InfoProductProps {
 }
 
 export const InfoProduct: React.FC<InfoProductProps> = () => {
@@ -42,7 +41,7 @@ export const InfoProduct: React.FC<InfoProductProps> = () => {
 
             </Grid>
             <Grid item xs={5}>
-              <Typography sx={{ fontWeight: 'bold', fontSize: 'h5.fontSize', mb: '1rem' }}>{"Nombre_Producto"}</Typography>
+              <Typography sx={{ fontWeight: 'bold', fontSize: 'h5.fontSize', mb: '1rem' }}>{"Nombre_Producto "+id}</Typography>
               <Typography sx={{ fontSize: 'h6.fontSize', mb: '2rem' }}>{"$Precio"}</Typography>
 
               <Grid container columnSpacing={3}>
