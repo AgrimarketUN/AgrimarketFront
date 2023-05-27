@@ -51,39 +51,43 @@ const ForgotPasswordPage: React.FC<ForgotPasswordProps> = () => {
 
   return (
     <HomeGrid>
-      <FormWrapper
-        component="form"
-        noValidate
-        className="childComponent"
-        sx={{
-          "& .MuiTextField-root": {
-            marginBottom: margin,
-            width: width,
-            height: height,
-          },
-          "& button": { marginBottom: margin },
-        }}
-        onSubmit={handleSubmit}
-      >
-        <TextField
-          id="email"
-          name="email"
-          label="Correo electrónico"
-          variant="outlined"
-          type="email"
-          value={formValues.email}
-          onChange={handleChange}
-        />
-        <StyledButton variant="contained" type="submit" name="reset">
-          Restablecer contraseña
-        </StyledButton>
-        {showMessage && ( // Mostrar mensaje cuando showMessage es verdadero
-          <p>Se ha enviado un correo electrónico de restablecimiento de contraseña.</p>
-        )}
-        <StyledTextButton onClick={() => navigate("/?mtail=${formValues.email}")}>
-          Volver
-        </StyledTextButton>
-      </FormWrapper>
+      <form onSubmit={handleSubmit} noValidate>
+        <FormWrapper
+          className="childComponent"
+          sx={{
+            "& .MuiTextField-root": {
+              marginBottom: margin,
+              width: width,
+              height: height,
+            },
+            "& button": { marginBottom: margin },
+          }}
+        >
+          <TextField
+            id="email"
+            name="email"
+            label="Correo electrónico"
+            variant="outlined"
+            type="email"
+            value={formValues.email}
+            onChange={handleChange}
+          />
+          <StyledButton variant="contained" type="submit" name="reset">
+            Restablecer contraseña
+          </StyledButton>
+          {showMessage && ( // Mostrar mensaje cuando showMessage es verdadero
+            <p>
+              Se ha enviado un correo electrónico de restablecimiento de
+              contraseña.
+            </p>
+          )}
+          <StyledTextButton
+            onClick={() => navigate("/?mtail=${formValues.email}")}
+          >
+            Volver
+          </StyledTextButton>
+        </FormWrapper>
+      </form>
     </HomeGrid>
   );
 };

@@ -70,53 +70,50 @@ const LoginPage: React.FC<LoginProps> = () => {
 
   return (
     <HomeGrid>
-      <FormWrapper
-        component="form"
-        noValidate
-        autoComplete="on"
-        className="childComponent"
-        sx={{
-          "& .MuiTextField-root": {
-            marginBottom: margin,
-            width: width,
-            height: height,
-          },
-          "& button": { marginBottom: margin },
-        }}
-        onSubmit={handleSubmit}
-      >
-        <TextField
-          id="email"
-          name="email"
-          label="Correo electrónico"
-          variant="outlined"
-          type="email"
-          value={formValues.email}
-          onChange={handleChange}
-        />
-        <TextField
-          id="password"
-          name="password"
-          label="Contraseña"
-          variant="outlined"
-          type="password"
-          value={formValues.password}
-          onChange={handleChange}
-        />
-        <StyledTextButton
-          onClick={() => navigate("/forgotPassword")}
+      <form onSubmit={handleSubmit} noValidate autoComplete="on">
+        <FormWrapper
+          className="childComponent"
+          sx={{
+            "& .MuiTextField-root": {
+              marginBottom: margin,
+              width: width,
+              height: height,
+            },
+            "& button": { marginBottom: margin },
+          }}
         >
-          ¿Olvidó su password?
-        </StyledTextButton>
-        <StyledButton variant="contained" type="submit" name="login">
-          Iniciar sesión
-        </StyledButton>
-        <StyledTextButton onClick={() => navigate("/signup")}>
-          Registro
-        </StyledTextButton>
-      </FormWrapper>
+          <TextField
+            id="email"
+            name="email"
+            label="Correo electrónico"
+            variant="outlined"
+            type="email"
+            value={formValues.email}
+            onChange={handleChange}
+          />
+          <TextField
+            id="password"
+            name="password"
+            label="Contraseña"
+            variant="outlined"
+            type="password"
+            value={formValues.password}
+            onChange={handleChange}
+          />
+          <StyledTextButton onClick={() => navigate("/forgotPassword")}>
+            ¿Olvidó su password?
+          </StyledTextButton>
+          <StyledButton variant="contained" type="submit" name="login">
+            Iniciar sesión
+          </StyledButton>
+          <StyledTextButton onClick={() => navigate("/signup")}>
+            Registro
+          </StyledTextButton>
+        </FormWrapper>
+      </form>
     </HomeGrid>
   );
 };
 
 export default LoginPage;
+//agri
