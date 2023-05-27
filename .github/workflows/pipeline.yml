@@ -63,7 +63,7 @@ jobs:
         git config --global user.email "dmirandam@unal.edu.co"      
         cd AWS-Terraform-Pipeline  
         ls
-        git push https://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@github.com/AgrimarketUN/AWS-Terraform-Pipeline.git
+        git push https://${{ secrets.GIT_TOKEN }}@github.com/AgrimarketUN/AWS-Terraform-Pipeline.git
       env:
         TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
