@@ -28,8 +28,8 @@ jobs:
 
     - name: Configure Git
       run: |
-        git config --global user.name "dmirandam"
-        git config --global user.email "dmirandam@unal.edu.co"
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
 
     - name: Clone GitHub repository
       run: git clone https://github.com/AgrimarketUN/AWS-Terraform-Pipeline.git
