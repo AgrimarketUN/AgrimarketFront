@@ -45,7 +45,8 @@ jobs:
         git status
 
     - name: Commit to GitHub repository
-      run: |   
+      run: | 
+        cd AWS-Terraform-Pipeline  
         pwd
         ls -al
         git add .
