@@ -3,7 +3,7 @@ name: Docker Build & Publish
 on:
   push:
     branches:
-      - docker_test
+      - dev
 
 jobs:
   build_and_publish:
@@ -26,12 +26,20 @@ jobs:
         push: true
         tags: psiquedelos/is2_front:latest
 
-    - name: Push to another repository
-      uses: ad-m/github-push-action@master
-      with:
-        repository: AgrimarketUN/AWS-Terraform-Pipeline
-        branch: main
-      env:
-        GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+    - name: Configure Git
+      run: |
+        git config --global user.name "dmirandam"
+        git config --global user.email "dmirandam@unal.edu.co"
 
+    - name: Clone GitHub repository
+      run: git clone https://github.com/AgrimarketUN/AWS-Terraform-Pipeline.git
 
+    - name: Move Docker image to GitHub repository
+      run: mv ./psiquedelos/is2_front:latest ./AWS-Terraform-Pipeline
+
+    - name: Commit and push changes to GitHub repository
+      run: |
+        cd AWS-Terraform-Pipeline
+        git add .
+        git commit -m "Add Docker image"
+        git push
