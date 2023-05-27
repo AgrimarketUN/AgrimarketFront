@@ -10,21 +10,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+    # - name: Checkout repository
+    #   uses: actions/checkout@v2
 
-    - name: Login to Docker Hub
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    # - name: Login to Docker Hub
+    #   uses: docker/login-action@v1
+    #   with:
+    #     username: 
 
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v2
-      with:
-        context: .
-        push: true
-        tags: psiquedelos/is2_front:latest
+    # - name: Build and push Docker image
+    #   uses: docker/build-push-action@v2
+    #   with:
+    #     context: .
+    #     push: true
+    #     tags: psiquedelos/is2_front:latest
 
     - name: Configure Git
       run: |
@@ -45,4 +44,4 @@ jobs:
         git commit -m "Add Docker image"
 
     - name: push changes to GitHub repository
-      run: git push https://${{ secrets.GIT_TOKEN }}@github.com/AgrimarketUN/AWS-Terraform-Pipeline.git
+      run: git push https://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@github.com/AgrimarketUN/AWS-Terraform-Pipeline.git
