@@ -12,11 +12,8 @@ jobs:
     steps:
     - name: Create File
       run: |
-        caracteres="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        longitud=8
-        nombre_aleatorio=$(cat /dev/urandom | tr -dc "$caracteres" | fold -w "$longitud" | head -n 1)
-        fecha_hora=$(date +"%Y-%m-%d %H:%M:%S")
-        echo -e "$fecha_hora\nfront" > "$nombre_aleatorio"
+        touch "sdf"
+
         ls -al
 
 
