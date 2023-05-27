@@ -53,4 +53,8 @@ jobs:
         git commit -m "Add Docker image"
 
     - name: push changes to GitHub repository
-      run: git push https://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@github.com/AgrimarketUN/AWS-Terraform-Pipeline.git
+    
+      run: |
+        cd AWS-Terraform-Pipeline  
+        git push https://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@github.com/AgrimarketUN/AWS-Terraform-Pipeline.git
+        
