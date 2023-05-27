@@ -54,7 +54,7 @@ jobs:
       run: | 
         cd AWS-Terraform-Pipeline
         git add .
-        git commit -m "Add Docker image"
+        git commit -m "New front Docker image"
 
     - name: Push changes to GitHub repository
       run: |
