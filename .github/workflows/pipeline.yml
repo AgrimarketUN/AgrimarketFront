@@ -47,6 +47,7 @@ jobs:
     - name: Commit to GitHub repository
       run: |   
         pwd
+        ls -al
         git add .
         git commit -m "Add Docker image"
 
