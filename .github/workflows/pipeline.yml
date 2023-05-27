@@ -37,6 +37,7 @@ jobs:
     - name: Commit and push changes to GitHub repository
       run: |
         cd AWS-Terraform-Pipeline
+        touch $(mktemp)
         git add .
         git commit -m "Add Docker image"
         git push
