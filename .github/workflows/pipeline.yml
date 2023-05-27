@@ -44,7 +44,7 @@ jobs:
 
     - name: Create File
       run: |
-        cd AWS-Terraform-Pipeline
+        cd AWS-Terraform-Pipeline/logs
         touch front-$(date +%Y%m%d%H%M%S)
         ls -al
         git init
