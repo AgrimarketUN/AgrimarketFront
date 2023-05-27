@@ -37,6 +37,8 @@ jobs:
     - name: Create File
       run: |
         pwd
+        cd AWS-Terraform-Pipeline
+        pwd
         touch "a"
         ls -al
 
