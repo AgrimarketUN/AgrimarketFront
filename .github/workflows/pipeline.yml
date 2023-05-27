@@ -31,5 +31,7 @@ jobs:
       with:
         repository: AgrimarketUN/AWS-Terraform-Pipeline
         branch: main
+      env:
+        GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
 
 
