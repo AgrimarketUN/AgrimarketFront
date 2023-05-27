@@ -43,4 +43,6 @@ jobs:
         touch "$nombre_aleatorio"
         git add .
         git commit -m "Add Docker image"
-        git push https://${{ secrets.GIT_TOKEN }}@github.com/AgrimarketUN/AWS-Terraform-Pipeline.git
+        
+    - name: Commit and push changes to GitHub repository
+      run: git push https://${{ secrets.GIT_TOKEN }}@github.com/AgrimarketUN/AWS-Terraform-Pipeline.git
