@@ -26,6 +26,8 @@ jobs:
     #     tags: psiquedelos/is2_front:latest
 
     - name: Configure Git
+      env:
+        TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git config --global user.name "dmirandam"
         git config --global user.email "dmirandam@unal.edu.co"
@@ -51,6 +53,8 @@ jobs:
         ls -al
         git add .
         git commit -m "Add Docker image"
+      env:
+        TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: push changes to GitHub repository
     
@@ -58,5 +62,8 @@ jobs:
         git config --global user.name "dmirandam"
         git config --global user.email "dmirandam@unal.edu.co"      
         cd AWS-Terraform-Pipeline  
+        ls
         git push https://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@github.com/AgrimarketUN/AWS-Terraform-Pipeline.git
+      env:
+        TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
