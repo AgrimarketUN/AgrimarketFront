@@ -3,7 +3,7 @@ import { UserInfo } from "@/models";
 import { put } from "@/services"
 
 const fetchUpdateUser = async (data: UserInfo) => {
-  const response = await put(api.updateUser, data);
+  const response = await put(api.updateuser, data);
   return response;
 };
 
