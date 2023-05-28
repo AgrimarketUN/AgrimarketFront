@@ -1,3 +1,11 @@
 export type shoppingCart = {
-  [productId: number]: number,
-}
+  [productId: number]: {
+    quantity: number;
+    availableQuantity: number;
+    price: number;
+    name: string;
+    unit: string;
+    image?: string;
+    expiryDate?: Date;
+  };
+};

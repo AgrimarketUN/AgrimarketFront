@@ -30,12 +30,8 @@ function ProductCard({ product }: { product: ProductInterface }) {
     window.open(`/product/${product.id}`, "_blank");
   };
 
-  const handleAddToCart = (
-    productId: number,
-    quantity: number,
-    stock: number
-  ) => {
-    addProduct(productId, quantity, stock, shoppingCart, dispatch)
+  const handleAddToCart = () => {
+    addProduct(product, quantity, shoppingCart, dispatch);
   };
 
   return (
@@ -75,9 +71,7 @@ function ProductCard({ product }: { product: ProductInterface }) {
           size="small"
         />
         <IconButton
-          onClick={() => {
-            handleAddToCart(product.id, quantity, product.availableQuantity);
-          }}
+          onClick={() => handleAddToCart()}
           aria-label="Añadir al carrito"
         >
           <AddShoppingCartIcon />

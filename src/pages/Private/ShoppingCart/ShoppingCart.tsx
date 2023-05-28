@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Box, Container, Typography, Button, Stack } from "@mui/material";
 import { useNavigate } from "react-router";
 import { PrivateGrid } from "@/common";
-import { Cart } from "./components/Cart";
+import { Item } from "./components/Item";
 import { useSelector } from "react-redux";
 import { AppStore } from "@/models";
 import { getProduct, getShoppingCart } from "@/utils";
@@ -16,20 +16,17 @@ const ShoppingCart: React.FC<ShoppingCartProps> = () => {
   const shoppingCart = useSelector((state: AppStore) => state.shoppingCart);
   const [totalPrice, setTotalPrice] = React.useState(0);
 
-  const total = async () => {
-    const prices = await Promise.all(
-      Object.entries(shoppingCart).map(([productId, quantity]) =>
-        getProduct(productId).then((data) => data.price * quantity)
-      )
+  const total = () => {
+    let total = 0;
+    Object.entries(shoppingCart).map(
+      ([_, value]) => {
+        (total += value.quantity * value.price);}
     );
-    setTotalPrice(prices.reduce((a, b) => a + b, 0));
+    setTotalPrice(total);
   };
 
   useEffect(() => {
     getShoppingCart(dispatcher);
-  }, [shoppingCart]);
-
-  useEffect(() => {
     total();
   }, [shoppingCart]);
 
@@ -39,8 +36,11 @@ const ShoppingCart: React.FC<ShoppingCartProps> = () => {
       <Box sx={{ flexGrow: 1, width: "100%" }} alignItems="center">
         <Container sx={{ width: "100%", textAlign: "left" }}>
           <Stack>
-            {Object.entries(shoppingCart).map(([productId, quantity]) => (
-              <Cart productId={productId} quantity={quantity} />
+            {Object.entries(shoppingCart).map(([productId, value]) => (
+              <Item
+                productId={productId}
+                key={productId}
+              />
             ))}
           </Stack>
           <Typography variant="h4" align="center">

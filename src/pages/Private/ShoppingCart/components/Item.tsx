@@ -15,20 +15,21 @@ import React, { useState } from "react";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Product } from "@/models";
+import { AppStore, Product } from "@/models";
 import { deleteProduct, getProduct, updateProduct } from "@/utils";
 import { useDispatch } from "react-redux";
 import { Button } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 interface CartProps {
   productId: string;
-  quantity: number;
-}
+};
 
-export const Cart: React.FC<CartProps> = ({ productId, quantity }) => {
+export const Item: React.FC<CartProps> = ({ productId }) => {
   const dispatcher = useDispatch();
-  const [product, setProduct] = useState<Product>({} as Product);
-  const [newQuantity, setNewQuantity] = useState<number>(quantity);
+  const shoppingCart = useSelector((state: AppStore) => state.shoppingCart);
+  const item = shoppingCart[parseInt(productId)];
+  const [newQuantity, setNewQuantity] = useState<number>(item.quantity);
 
   function incrementquantity() {
     const updatedquantity = newQuantity + 1;
@@ -52,12 +53,6 @@ export const Cart: React.FC<CartProps> = ({ productId, quantity }) => {
     deleteProduct(id, dispatcher);
   };
 
-  React.useEffect(() => {
-    getProduct(productId).then((data) => {
-      setProduct(data);
-    });
-  }, [productId]);
-
   return (
     <div>
       <Card sx={{ display: "flex", width: "100 vw", mb: "0.5rem" }}>
@@ -65,7 +60,7 @@ export const Cart: React.FC<CartProps> = ({ productId, quantity }) => {
           component="img"
           sx={{ width: 150 }}
           image={
-            product?.image ||
+            item?.image ||
             "https://thumbs.dreamstime.com/z/imagen-del-tema-de-los-productos-agr%C3%ADcolas-34266908.jpg"
           }
           alt="Imagen Producto"
@@ -75,11 +70,11 @@ export const Cart: React.FC<CartProps> = ({ productId, quantity }) => {
             variant="h5"
             sx={{ fontWeight: "bold", ml: "0.2rem", my: "1rem" }}
           >
-            {product.name}
+            {item.name}
           </Typography>
           <Typography sx={{ ml: "0.2rem" }}>Fecha de expiración</Typography>
           <Typography sx={{ ml: "0.2rem" }}>
-            {product?.expiryDate?.toLocaleDateString() || "-"}
+            {item?.expiryDate?.toLocaleDateString() || "-"}
           </Typography>
         </CardContent>
         <CardActions>
@@ -93,7 +88,7 @@ export const Cart: React.FC<CartProps> = ({ productId, quantity }) => {
               <Grid item xs={6} sx={{ display: "flex" }}>
                 <IconButton
                   onClick={decrementquantity}
-                  disabled={quantity === 0}
+                  disabled={newQuantity === 0}
                   aria-label="removeCircle"
                 >
                   <RemoveCircleIcon />
@@ -105,10 +100,10 @@ export const Cart: React.FC<CartProps> = ({ productId, quantity }) => {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        {product.unit}
+                        {item.unit}
                       </InputAdornment>
                     ),
-                    inputProps: { min: 0, max: product.availableQuantity },
+                    inputProps: { min: 0, max: item.availableQuantity },
                   }}
                   value={newQuantity}
                   size="small"
@@ -120,16 +115,16 @@ export const Cart: React.FC<CartProps> = ({ productId, quantity }) => {
               <Grid item xs={6}>
                 <Typography
                   sx={{ mx: "auto" }}
-                >{`Disponible ${product.availableQuantity} ${product.unit}`}</Typography>
+                >{`Disponible ${item.availableQuantity} ${item.unit}`}</Typography>
               </Grid>
             </Grid>
             <Button
               variant="contained"
               onClick={() =>
                 handleUpdate(
-                  product.id.toString(),
+                  productId,
                   newQuantity,
-                  product.availableQuantity
+                  item.availableQuantity
                 )
               }
             >
@@ -139,14 +134,14 @@ export const Cart: React.FC<CartProps> = ({ productId, quantity }) => {
         </CardActions>
         <CardContent sx={{ width: "30%" }}>
           <Typography variant="h5" sx={{ mx: "1rem", my: "4rem" }}>
-            {"$ " + product.price * newQuantity}
+            {`$ ${item.price * newQuantity}`}
           </Typography>
         </CardContent>
         <Divider orientation="vertical" flexItem />
         <CardActions>
           <IconButton
             aria-label="deleteIcon"
-            onClick={() => handleDelete(product.id.toString())}
+            onClick={() => handleDelete(productId)}
           >
             <DeleteIcon />
           </IconButton>
