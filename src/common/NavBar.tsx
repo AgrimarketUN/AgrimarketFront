@@ -19,6 +19,9 @@ import { clearUser } from "@/redux/states/userState";
 import { clearFilters, setFilters } from "@/redux/states/filtersState";
 import { useSelector } from "react-redux";
 import { AppStore } from "@/models";
+import { resetStore } from "@/redux/store";
+import { EmptyShoppingCartState } from "@/redux/states/shoppingCartState";
+import { getShoppingCart } from "@/utils";
 
 const SearchDiv = styled("div")(({ theme }) => ({
   position: "relative",
@@ -54,11 +57,10 @@ const NavBar: React.FC<{}> = () => {
   const navigate = useNavigate();
   const dispatcher = useDispatch();
 
-  const shoppingCartLength = useSelector(
-    (state: AppStore) => Object.keys(state.shoppingCart).length
-  );
-
   const shoppingCart = useSelector((state: AppStore) => state.shoppingCart);
+  const shoppingCartLength = Object.keys(shoppingCart).length;
+
+  
 
   const [Search, setSearch] = React.useState<string>("");
 
@@ -93,7 +95,7 @@ const NavBar: React.FC<{}> = () => {
   };
 
   const handleLogOut = () => {
-    dispatcher(clearUser());
+    resetStore(dispatcher);
     sessionStorage.clear();
     navigate("/");
   };
@@ -108,7 +110,9 @@ const NavBar: React.FC<{}> = () => {
   };
 
   useEffect(() => {
-    console.log("shopping cart:", shoppingCart);
+    if (shoppingCart === EmptyShoppingCartState){
+      getShoppingCart(dispatcher);
+    }
   }, [shoppingCart]);
 
   const menuId = "primary-search-account-menu";

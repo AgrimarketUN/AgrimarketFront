@@ -12,6 +12,7 @@ import {
   ProfileUser,
   UpdateProfileUser,
   Purchase,
+  PurchaseExit,
 } from "@/pages";
 import { RoutesNotFound } from "@/components";
 
@@ -30,6 +31,7 @@ const AppRouter: React.FC<{}> = () => {
         <Route path="/profile" element={<ProfileUser />} />
         <Route path="/updateProfile" element={<UpdateProfileUser />} />
         <Route path="/purchase" element={<Purchase />} />
+        <Route path="/purchaseExit" element={<PurchaseExit />} />
       </Route>
     </RoutesNotFound>
   );

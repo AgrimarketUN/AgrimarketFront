@@ -1,4 +1,4 @@
-import { number, object, string } from "yup";
+import { object, string } from "yup";
 
 export const signUpValidationSchema = object().shape({
   firstname: string().required("Nombre requerido"),

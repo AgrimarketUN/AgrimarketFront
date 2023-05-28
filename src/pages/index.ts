@@ -19,3 +19,4 @@ export { default as RestorePassword } from './Public/RestorePassword/RestorePass
 export { default as resetPasswordValidationSchema } from './Public/RestorePassword/utils/resetPasswordValidationSchema';
 export { default as SignUp } from './Public/SignUp/SignUp';
 export * from './Public/SignUp/utils/signUpValidationSchema';
+export { default as PurchaseExit } from './Private/PurchaseExit/PurchaseExit';

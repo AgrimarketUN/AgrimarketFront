@@ -1,5 +1,8 @@
 export { default as AuthGuard } from './AuthGuard';
 export * from './SubjectManager';
-export { default as addProduct } from './addProduct';
+export * from './cartActions';
+export * from './fetchUserInfo';
+export * from './inputsValidationSchema';
 export * from './snackBarUtils';
 export * from './validationErrors';
+export * from './productsAction';
