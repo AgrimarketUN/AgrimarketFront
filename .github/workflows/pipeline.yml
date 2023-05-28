@@ -24,7 +24,7 @@ jobs:
       with:
         context: .
         push: true
-        tags: psiquedelos/is2_back:latest
+        tags: psiquedelos/is2_front:latest
 
     - name: Configure SSH key
       run: |
