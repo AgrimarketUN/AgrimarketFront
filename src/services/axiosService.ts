@@ -16,4 +16,3 @@ export const get = async (url: string) => {
   return response.data;
 }
 
-agriamarket.elb.aws.com
