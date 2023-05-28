@@ -9,6 +9,7 @@ import {
   TextField,
   Divider,
   Stack,
+  InputAdornment,
 } from "@mui/material";
 import React, { useState } from "react";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
@@ -38,6 +39,10 @@ export const Cart: React.FC<CartProps> = ({ productId, quantity }) => {
     const updatedquantity = newQuantity - 1;
     setNewQuantity(updatedquantity);
   }
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewQuantity(Number(e.target.value));
+  };
 
   const handleUpdate = (id: string, quantity: number, stock: number) => {
     updateProduct(id, quantity, stock, dispatcher);
@@ -93,9 +98,21 @@ export const Cart: React.FC<CartProps> = ({ productId, quantity }) => {
                 >
                   <RemoveCircleIcon />
                 </IconButton>
-                <Typography sx={{ mx: "1rem", my: "0.5rem" }}>
-                  {newQuantity}
-                </Typography>
+                <TextField
+                  onChange={onChange}
+                  id="quantity"
+                  sx={{ mx: "1rem", my: "0.5rem" }}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        {product.unit}
+                      </InputAdornment>
+                    ),
+                    inputProps: { min: 0, max: product.availableQuantity },
+                  }}
+                  value={newQuantity}
+                  size="small"
+                />
                 <IconButton onClick={incrementquantity} aria-label="addCircle">
                   <AddCircleIcon />
                 </IconButton>
