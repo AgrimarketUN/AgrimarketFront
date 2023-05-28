@@ -18,7 +18,7 @@ function ProductsGrid() {
   }, []);
 
   useEffect(() => {
-    console.log("filters", filters);
+    //console.log("filters", filters);
     setProducts(filter(products, filters));
   }, [filters]);
 

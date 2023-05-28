@@ -1,3 +1,3 @@
 export type shoppingCart = {
-  [productId: number]: [quantity: number],
+  [productId: number]: number,
 }

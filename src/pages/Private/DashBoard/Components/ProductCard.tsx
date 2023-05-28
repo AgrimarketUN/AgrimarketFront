@@ -10,13 +10,15 @@ import {
   Typography,
 } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { Product as ProductInterface } from "@/models";
+import { AppStore, Product as ProductInterface } from "@/models";
 import { useState } from "react";
-import addProduct from "@/utils/addProduct";
 import { useDispatch } from "react-redux";
+import { addProduct } from "@/utils";
+import { useSelector } from "react-redux";
 
 function ProductCard({ product }: { product: ProductInterface }) {
   const dispatch = useDispatch();
+  const shoppingCart = useSelector((state: AppStore) => state.shoppingCart);
 
   const [quantity, setQuantity] = useState<number>(0);
 
@@ -33,7 +35,7 @@ function ProductCard({ product }: { product: ProductInterface }) {
     quantity: number,
     stock: number
   ) => {
-    addProduct(productId, quantity, stock, dispatch);
+    addProduct(productId, quantity, stock, shoppingCart, dispatch)
   };
 
   return (

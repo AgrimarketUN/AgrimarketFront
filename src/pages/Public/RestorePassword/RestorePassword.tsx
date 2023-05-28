@@ -3,8 +3,8 @@ import { HomeGrid } from "@/components";
 import { TextField } from "@mui/material";
 import { FormWrapper, StyledButton, StyledTextButton, api } from "@/common";
 import { useNavigate } from "react-router-dom";
-import resetPasswordValidationSchema from "./utils/resetPasswordValidationSchema";
 import { put } from "@/services";
+import { inputsValidationSchema } from "@/utils";
 
 export interface ResetPasswordProps {}
 
@@ -30,18 +30,18 @@ const ResetPasswordPage: React.FC<ResetPasswordProps> = () => {
       [name]: value,
     }));
   };
-
+  
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    resetPasswordValidationSchema
+    inputsValidationSchema
       .validate(formValues)
       .then((formvalues) => {
         console.log("Validación correcta", formvalues);
         const resetPassword = async () => {
           try {
-            const response = await put(api.resetpassword, formvalues);
+            const response = await put(api.resetPassword, formvalues);
             console.log(response);
             setShowMessage(true);
           } catch (error) {
