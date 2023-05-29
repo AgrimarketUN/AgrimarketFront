@@ -1,5 +1,5 @@
 import { api } from "@/common";
-import { Product, ProductsFilters } from "@/models";
+import { NewProduct, Product, ProductsFilters } from "@/models";
 import { filter } from "@/pages";
 import { EmptyFiltersState } from "@/redux/states/filtersState";
 import { post, productsSubjectService as productsService } from "@/services";
@@ -24,7 +24,7 @@ export const getProducts = (filters: ProductsFilters) => {
     });
 };
 
-export const getSellerProducts = (filters: ProductsFilters) => {
+export const getSellerProducts = () => {//filters: ProductsFilters) => {
   const response = async () => {
     const data = await get(api.getSellerProducts);
     return data.Products as Product[];
@@ -33,11 +33,12 @@ export const getSellerProducts = (filters: ProductsFilters) => {
   response()
     .then((data) => {
       console.log(data);
-      if (filters !== EmptyFiltersState) {
+      /*if (filters !== EmptyFiltersState) {
         productsService.setSubject(filter(data, filters));
       } else {
         productsService.setSubject(data);
-      }
+      }*/
+      productsService.setSubject(data);
     })
     .catch((e) => {
       console.error(e);
@@ -53,3 +54,33 @@ export const getProduct = async (id: string): Promise<Product> => {
     throw e;
   }
 };
+
+export const createProduct = async (newProduct: NewProduct): Promise<NewProduct> => {
+  try {
+    const data = await post(api.createProduct, newProduct);
+    return data;
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+}
+
+export const updateProductSell = async (product: NewProduct, id: string): Promise<NewProduct> => {
+  try {
+    const data = await post(api.updateProduct+id, product);
+    return data;
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+}
+
+export const deleteProductSell = async (id: string): Promise<string> => {
+  try {
+    const data = await post(api.deleteProduct, { productId: id });
+    return data;
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+}

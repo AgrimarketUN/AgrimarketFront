@@ -13,7 +13,7 @@ const DashBoard: React.FC<{}> = () => {
 
   React.useEffect(() => {
     if (isSeller) {
-      getSellerProducts(filters);
+      getSellerProducts();
     } else {
       getProducts(filters);
     }

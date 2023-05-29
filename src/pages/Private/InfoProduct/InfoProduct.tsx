@@ -13,14 +13,16 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { PrivateGrid } from "@/common";
 import { useParams } from "react-router";
-import { Product } from "@/models";
+import { AppStore, Product } from "@/models";
 import { useDispatch } from "react-redux";
 import { addItem } from "@/redux/states/shoppingCartState";
-import { getProduct } from "@/utils";
+import { getProduct, updateProductSell } from "@/utils";
+import { useSelector } from "react-redux";
 
 export interface InfoProductProps {}
 
 export const InfoProduct: React.FC<InfoProductProps> = () => {
+  const isSeller = useSelector((state: AppStore) => state.user.isSeller);
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -35,7 +37,7 @@ export const InfoProduct: React.FC<InfoProductProps> = () => {
   function decrementCount() {
     const updatedCount = quantity - 1;
     setQuantity(updatedCount);
-  };
+  }
 
   const changeQuantity = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuantity(Number(e.target.value));
@@ -47,6 +49,14 @@ export const InfoProduct: React.FC<InfoProductProps> = () => {
     stock: number
   ) => {
     dispatch(addItem({ productId, quantity, stock }));
+  };
+
+  const handleEdit = () => {
+    //updateProductSell(product, id);
+  };
+
+  const handleDelete = () => {
+    //deleteProduct(id, dispatcher);
   };
 
   React.useEffect(() => {
@@ -81,52 +91,78 @@ export const InfoProduct: React.FC<InfoProductProps> = () => {
                 {"$" + product.price}
               </Typography>
 
-              <Grid container columnSpacing={3}>
-                <Grid item xs={2} p={0}>
-                  <IconButton
-                    onClick={decrementCount}
-                    disabled={quantity === 0}
-                    aria-label="removeCircle"
-                  >
-                    <RemoveCircleIcon />
-                  </IconButton>
+              {!isSeller && (
+                <Grid container columnSpacing={3}>
+                  <Grid item xs={2} p={0}>
+                    <IconButton
+                      onClick={decrementCount}
+                      disabled={quantity === 0}
+                      aria-label="removeCircle"
+                    >
+                      <RemoveCircleIcon />
+                    </IconButton>
+                  </Grid>
+                  <Grid item xs={5} p={0} sx={{ mb: "2rem" }}>
+                    <TextField
+                      value={quantity}
+                      variant="outlined"
+                      onChange={changeQuantity}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            {product.unit}
+                          </InputAdornment>
+                        ),
+                        inputProps: { min: 0, max: product.availableQuantity },
+                      }}
+                    />
+                  </Grid>
+                  <Grid item xs={2} p={0}>
+                    <IconButton onClick={incrementCount} aria-label="addCircle">
+                      <AddCircleIcon />
+                    </IconButton>
+                  </Grid>
                 </Grid>
-                <Grid item xs={5} p={0} sx={{ mb: "2rem" }}>
-                  <TextField
-                    value={quantity}
-                    variant="outlined"
-                    onChange={changeQuantity}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">{product.unit}</InputAdornment>
-                      ),
-                      inputProps: { min: 0, max: product.availableQuantity },
-                    }}
-                  />
-                </Grid>
-                <Grid item xs={2} p={0}>
-                  <IconButton onClick={incrementCount} aria-label="addCircle">
-                    <AddCircleIcon />
-                  </IconButton>
-                </Grid>
-              </Grid>
+              )}
 
               <Typography sx={{ fontSize: "small", mb: "2rem" }}>
                 {`Disponible: ${product.availableQuantity} ${product.unit}`}
               </Typography>
 
-              <Button
-                variant="contained"
-                onClick={() => {
-                  handleAddToCart(
-                    product.id,
-                    quantity,
-                    product.availableQuantity
-                  );
-                }}
-              >
-                Añadir al carrito
-              </Button>
+              {!isSeller && (
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    handleAddToCart(
+                      product.id,
+                      quantity,
+                      product.availableQuantity
+                    );
+                  }}
+                >
+                  Añadir al carrito
+                </Button>
+              )}
+              {isSeller && (
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    handleEdit();
+                  }}
+                >
+                  Editar producto
+                </Button>
+              )}
+              {!isSeller && (
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    handleDelete();
+                  }}
+                >
+                  Eliminar producto
+                </Button>
+              )}
             </Grid>
           </Grid>
           <Grid sx={{ mt: 2 }} container columnSpacing={1}>

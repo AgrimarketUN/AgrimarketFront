@@ -5,14 +5,16 @@ import { useSelector } from "react-redux";
 export interface AxiosProps {}
 import { store } from "@/redux";
 
-const urlsCheck = ["cart", "order", "user", "store/create"];
+const urlsCheck = ["cart", "order", "user", "store/create", "product/create", "product/update", "product/delete", "product/getprodsell"];
 
 const AxiosInterceptor = () => {
   axios.interceptors.request.use((request) => {
-    console.log("url:", request.url);
+    //console.log("url:", request.url);
     const token = sessionStorage.getItem("token");
     if (urlsCheck.some((url) => request.url?.includes(url))) {
       request.headers.Authorization = token ? `Bearer ${token}` : "";
+			console.log("url:", request.url);
+			console.log("headers: ", request.headers);
       //console.log("token adjuntado a request headers:", request.headers.Authorization);
     }
     return request;

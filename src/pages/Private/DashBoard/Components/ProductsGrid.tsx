@@ -24,7 +24,7 @@ function ProductsGrid() {
 
   return (
     <Grid container spacing={2}>
-      {products.length === 0 ? (
+      {(!products || products.length === 0) ? (
         <h1>No products found</h1>
       ) : (
         products.map((product) => (

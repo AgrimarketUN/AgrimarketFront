@@ -4,7 +4,6 @@ import {
   Button,
   Card,
   FormControl,
-  IconButton,
   Input,
   InputAdornment,
   InputLabel,
@@ -64,7 +63,7 @@ const FiltersCard: React.FC<FiltterCardProps> = () => {
   const clearAllFilters = () => {
     dispatch(clearFilters());
     if (isSeller) {
-      getSellerProducts(EmptyFiltersState);
+      getSellerProducts();
     } else{
       getProducts(EmptyFiltersState);
     }

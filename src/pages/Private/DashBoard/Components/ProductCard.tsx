@@ -10,13 +10,15 @@ import {
   Typography,
 } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { AppStore, Product as ProductInterface } from "@/models";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addProduct } from "@/utils";
+import { addProduct, deleteProductSell } from "@/utils";
 import { useSelector } from "react-redux";
 
 function ProductCard({ product }: { product: ProductInterface }) {
+  const isSeller = useSelector((state: AppStore) => state.user.isSeller);
   const dispatch = useDispatch();
   const shoppingCart = useSelector((state: AppStore) => state.shoppingCart);
 
@@ -30,8 +32,12 @@ function ProductCard({ product }: { product: ProductInterface }) {
     window.open(`/product/${product.id}`, "_blank");
   };
 
-  const handleAddToCart = () => {
-    addProduct(product, quantity, shoppingCart, dispatch);
+  const handleAction = () => {
+    if (isSeller) {
+      deleteProductSell(product.id.toString());
+    } else {
+      addProduct(product, quantity, shoppingCart, dispatch);
+    }
   };
 
   return (
@@ -70,12 +76,13 @@ function ProductCard({ product }: { product: ProductInterface }) {
           defaultValue={0}
           size="small"
         />
-        <IconButton
-          onClick={() => handleAddToCart()}
+        {<IconButton
+          onClick={() => handleAction()}
           aria-label="Añadir al carrito"
         >
-          <AddShoppingCartIcon />
-        </IconButton>
+          {!isSeller && (<AddShoppingCartIcon />)}
+          { isSeller && (<DeleteIcon />)}
+        </IconButton>}
       </CardActions>
     </Card>
   );
