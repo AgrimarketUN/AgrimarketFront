@@ -5,6 +5,7 @@ import {
   clearShoppingCart,
   removeItem,
   setShoppingCart,
+  updateItemQuantity,
 } from "@/redux/states/shoppingCartState";
 import { deleteReq, get, post } from "@/services";
 import { Dispatch } from "@reduxjs/toolkit";
@@ -90,7 +91,7 @@ export const updateProduct = async (
 
   response()
     .then((data) => {
-      dispatch(addItem({ productId: id, quantity: quantity }));
+      dispatch(updateItemQuantity({ productId: id, quantity: quantity }));
       return data;
     })
     .catch((e) => {

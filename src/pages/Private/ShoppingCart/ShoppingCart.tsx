@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import { Box, Container, Typography, Button, Stack } from "@mui/material";
 import { useNavigate } from "react-router";
 import { PrivateGrid } from "@/common";
-import { Item } from "./components/Item";
+import { CartItem } from "./components/CartItem";
 import { useSelector } from "react-redux";
 import { AppStore } from "@/models";
-import { getProduct, getShoppingCart } from "@/utils";
+import { getShoppingCart } from "@/utils";
 import { useDispatch } from "react-redux";
 
 export interface ShoppingCartProps {}
@@ -36,9 +36,10 @@ const ShoppingCart: React.FC<ShoppingCartProps> = () => {
       <Box sx={{ flexGrow: 1, width: "100%" }} alignItems="center">
         <Container sx={{ width: "100%", textAlign: "left" }}>
           <Stack>
-            {Object.entries(shoppingCart).map(([productId, value]) => (
-              <Item
+            {Object.entries(shoppingCart).map(([productId, cartItem]) => (
+              <CartItem
                 productId={productId}
+                item={cartItem}
                 key={productId}
               />
             ))}

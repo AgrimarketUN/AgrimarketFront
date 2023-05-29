@@ -44,14 +44,14 @@ function ProductCard({ product }: { product: ProductInterface }) {
         <CardMedia
           component="img"
           height="194"
-          image={product.image}
+          image={product?.image || "https://thumbs.dreamstime.com/z/imagen-del-tema-de-los-productos-agr%C3%ADcolas-34266908.jpg"}
           alt={"Imagen producto " + product.name}
         />
         <CardContent>
           <Typography variant="h5">{product.name}</Typography>
           <Typography variant="h6">{"$" + product.price}</Typography>
           <Typography>
-            {"Stock " + product.availableQuantity + " " + product.unit}
+            {`Disponible ${product.availableQuantity} ${product.unit}`}
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -61,8 +61,8 @@ function ProductCard({ product }: { product: ProductInterface }) {
           onChange={handleQuantityChange}
           sx={{ width: 150 }}
           InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">{product.unit}</InputAdornment>
+            endAdornment: (
+              <InputAdornment position="end">{product.unit}</InputAdornment>
             ),
             inputProps: { min: 0, max: product.availableQuantity },
           }}

@@ -13,7 +13,7 @@ const width: string = "400px";
 const margin: string = "20px";
 const radius: string = "30px";
 
-const SignUpPage: React.FC<SignUpProps> = () => {
+const SignUpSeller: React.FC<SignUpProps> = () => {
   const navigate = useNavigate();
 
   const [formValues, setFormValues] = useState<UserCreate>({
@@ -23,7 +23,7 @@ const SignUpPage: React.FC<SignUpProps> = () => {
     password: "",
     address: "",
     phone: "",
-    isSeller: false,
+    isSeller: true,
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +42,9 @@ const SignUpPage: React.FC<SignUpProps> = () => {
         console.log("Validación correcta", formValues);
         const fetchAuth = async () => {
           const response = await post(api.register, formValues);
+          //post store create({name: nombre})
         };
+
         fetchAuth().then(() => {
           navigate("/");
         });
@@ -139,4 +141,4 @@ const SignUpPage: React.FC<SignUpProps> = () => {
   );
 };
 
-export default SignUpPage;
+export default SignUpSeller;
