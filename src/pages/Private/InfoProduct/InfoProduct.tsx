@@ -16,12 +16,13 @@ import { useParams } from "react-router";
 import { AppStore, Product } from "@/models";
 import { useDispatch } from "react-redux";
 import { addItem } from "@/redux/states/shoppingCartState";
-import { getProduct, updateProductSell } from "@/utils";
+import { addProduct, getProduct, updateProductSell } from "@/utils";
 import { useSelector } from "react-redux";
 
 export interface InfoProductProps {}
 
 export const InfoProduct: React.FC<InfoProductProps> = () => {
+  const shoppingCart = useSelector((state: AppStore) => state.shoppingCart);
   const isSeller = useSelector((state: AppStore) => state.user.isSeller);
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -48,7 +49,7 @@ export const InfoProduct: React.FC<InfoProductProps> = () => {
     quantity: number,
     stock: number
   ) => {
-    dispatch(addItem({ productId, quantity, stock }));
+    addProduct(product, quantity, shoppingCart, dispatch);
   };
 
   const handleEdit = () => {
@@ -153,7 +154,7 @@ export const InfoProduct: React.FC<InfoProductProps> = () => {
                   Editar producto
                 </Button>
               )}
-              {!isSeller && (
+              {isSeller && (
                 <Button
                   variant="contained"
                   onClick={() => {

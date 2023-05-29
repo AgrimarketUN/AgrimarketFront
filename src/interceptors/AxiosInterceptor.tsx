@@ -13,8 +13,8 @@ const AxiosInterceptor = () => {
     const token = sessionStorage.getItem("token");
     if (urlsCheck.some((url) => request.url?.includes(url))) {
       request.headers.Authorization = token ? `Bearer ${token}` : "";
-			console.log("url:", request.url);
-			console.log("headers: ", request.headers);
+			//console.log("url:", request.url);
+			//console.log("headers: ", request.headers);
       //console.log("token adjuntado a request headers:", request.headers.Authorization);
     }
     return request;
