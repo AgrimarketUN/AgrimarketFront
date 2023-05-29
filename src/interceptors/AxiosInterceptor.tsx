@@ -9,7 +9,7 @@ const urlsCheck = ["cart", "order", "user", "store/create"];
 
 const AxiosInterceptor = () => {
   axios.interceptors.request.use((request) => {
-    //console.log("url:", request.url);
+    console.log("url:", request.url);
     const token = sessionStorage.getItem("token");
     if (urlsCheck.some((url) => request.url?.includes(url))) {
       request.headers.Authorization = token ? `Bearer ${token}` : "";
