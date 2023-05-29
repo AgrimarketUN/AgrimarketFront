@@ -8,11 +8,35 @@ import {
   Autocomplete,
   TextField,
   IconButton,
+  Stack,
 } from "@mui/material";
-import { Buy } from "@/components/Buy/Buy";
+import { Buy } from "@/pages/Private/Purchase/components/Buy";
 import { PrivateGrid } from "@/common";
+import { useSelector } from "react-redux";
+import { AppStore } from "@/models";
+import { buyCart } from "@/utils";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export const Purchase: React.FC = () => {
+  const dispatcher = useDispatch();
+  const navigate = useNavigate();
+  const shoppingCart = useSelector((state: AppStore) => state.shoppingCart);
+
+  const total = () => {
+    let total = 0;
+    Object.entries(shoppingCart).map(
+      ([_, value]) => {
+        (total += value.quantity * value.price);}
+    );
+    return total;
+  };
+
+  const handleBuy = () => {
+    buyCart(dispatcher)
+    .then(() => navigate("/purchaseExit"))
+  };
+
   return (
     <PrivateGrid>
       <h1>Detalles compra</h1>
@@ -20,8 +44,14 @@ export const Purchase: React.FC = () => {
         <Container sx={{ width: "100%", textAlign: "left" }}>
           <Grid container spacing={2}>
             <Grid item xs={8}>
-              <Buy />
-              <Buy />
+              <Stack>
+                {Object.entries(shoppingCart).map(([productId, quantity]) => (
+                  <Buy
+                    productId={productId}
+                    key={productId}
+                  />
+                ))}
+              </Stack>
             </Grid>
             <Grid item xs={4}>
               <Typography
@@ -30,12 +60,12 @@ export const Purchase: React.FC = () => {
                 {"Resumen de compra"}
               </Typography>
               <Typography sx={{ fontSize: "h6.fontSize", mb: "2rem" }}>
-                {"Productos: #"}
+                {`Items: ${Object.keys(shoppingCart).length}`}
               </Typography>
               <Typography sx={{ fontSize: "h6.fontSize", mb: "2rem" }}>
-                {"Total: $..."}
+                {`$ ${total()}`}
               </Typography>
-              <Button variant="contained">Confirmar compra</Button>
+              <Button variant="contained" onClick={ handleBuy }>Confirmar compra</Button>
             </Grid>
           </Grid>
         </Container>

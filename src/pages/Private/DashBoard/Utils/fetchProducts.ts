@@ -6,23 +6,22 @@ import { get } from "@/services";
 import filter from "./filter";
 
 const getProducts = async () => {
-  console.log("api.getproducts", api.getproducts);
-  const data = await get(api.getproducts);
+  const data = await get(api.getProducts);
   return data.Products as Product[];
 };
 
 export const fetchProducts = (filters: ProductsFilters) => {
   const promise = getProducts();
 
-    promise
-      .then((data) => {
-        if(filters !== EmptyFiltersState){
-          productsService.setSubject(filter(data, filters));
-        }else{
-          productsService.setSubject(data);
-        }
-      })
-      .catch((e) => {
-        console.error(e);
-      });
-}
+  promise
+    .then((data) => {
+      if (filters !== EmptyFiltersState) {
+        productsService.setSubject(filter(data, filters));
+      } else {
+        productsService.setSubject(data);
+      }
+    })
+    .catch((e) => {
+      console.error(e);
+    });
+};

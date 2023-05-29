@@ -3,8 +3,8 @@ import { HomeGrid } from "@/components";
 import { TextField } from "@mui/material";
 import { FormWrapper, StyledButton, StyledTextButton, api } from "@/common";
 import { useNavigate } from "react-router-dom";
-import { forgotPasswordValidationSchema } from "./utils/forgotPasswordValidationSchema";
 import { post } from "@/services";
+import { inputsValidationSchema } from "@/utils";
 
 export interface ForgotPasswordProps {}
 
@@ -32,12 +32,12 @@ const ForgotPasswordPage: React.FC<ForgotPasswordProps> = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    forgotPasswordValidationSchema
+    inputsValidationSchema
       .validate(formValues)
       .then((values) => {
         console.log("Validación correcta", values);
         const fetchResetPassword = async () => {
-          const response = await post(api.forgotpassword, values);
+          const response = await post(api.forgotPassword, values);
           console.log(response);
           setShowMessage(true); // Actualizar estado para mostrar mensaje
         };
@@ -51,7 +51,7 @@ const ForgotPasswordPage: React.FC<ForgotPasswordProps> = () => {
 
   return (
     <HomeGrid>
-      <form onSubmit={handleSubmit} noValidate>
+      <form onSubmit={handleSubmit} autoComplete="on">
         <FormWrapper
           className="childComponent"
           sx={{

@@ -10,13 +10,15 @@ import {
   Typography,
 } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { Product as ProductInterface } from "@/models";
+import { AppStore, Product as ProductInterface } from "@/models";
 import { useState } from "react";
-import addProduct from "@/utils/addProduct";
 import { useDispatch } from "react-redux";
+import { addProduct } from "@/utils";
+import { useSelector } from "react-redux";
 
 function ProductCard({ product }: { product: ProductInterface }) {
   const dispatch = useDispatch();
+  const shoppingCart = useSelector((state: AppStore) => state.shoppingCart);
 
   const [quantity, setQuantity] = useState<number>(0);
 
@@ -28,12 +30,8 @@ function ProductCard({ product }: { product: ProductInterface }) {
     window.open(`/product/${product.id}`, "_blank");
   };
 
-  const handleAddToCart = (
-    productId: number,
-    quantity: number,
-    stock: number
-  ) => {
-    addProduct(productId, quantity, stock, dispatch);
+  const handleAddToCart = () => {
+    addProduct(product, quantity, shoppingCart, dispatch);
   };
 
   return (
@@ -73,9 +71,7 @@ function ProductCard({ product }: { product: ProductInterface }) {
           size="small"
         />
         <IconButton
-          onClick={() => {
-            handleAddToCart(product.id, quantity, product.availableQuantity);
-          }}
+          onClick={() => handleAddToCart()}
           aria-label="Añadir al carrito"
         >
           <AddShoppingCartIcon />

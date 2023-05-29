@@ -4,12 +4,12 @@ import { HomeGrid } from "@/components";
 import { TextField } from "@mui/material";
 import { FormWrapper, StyledButton, StyledTextButton } from "@/common";
 import { useNavigate } from "react-router-dom";
-import { loginValidationSchema } from "./utils/loginValidationSchema";
 import { AppStore, UserCredentials } from "@/models";
 import { post } from "@/services";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/redux/states/userState";
 import { useSelector } from "react-redux";
+import { inputsValidationSchema } from "@/utils";
 
 export interface LoginProps {}
 
@@ -39,7 +39,7 @@ const LoginPage: React.FC<LoginProps> = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    loginValidationSchema
+    inputsValidationSchema
       .validate(formValues)
       .then((formValues) => {
         const authUser = async () => {
@@ -48,29 +48,35 @@ const LoginPage: React.FC<LoginProps> = () => {
         };
 
         const promise = authUser();
-        promise.then((data) => {
-          sessionStorage.setItem("token", data.token);
-          sessionStorage.setItem("role", data.role);
-          if (!!sessionStorage.getItem("token")) {
-            navigate("/dashboard");
-          }
-          //dispatcher(setUser({ role: data.role, token: data.token }));
-        });
+        promise
+          .then((data) => {
+            if (data.token) {
+              sessionStorage.setItem("token", data.token);
+              sessionStorage.setItem("role", data.role);
+              dispatcher(
+                setUser({
+                  role: data.role,
+                  token: data.token,
+                  isSeller: data.isSeller,
+                })
+              );
+              navigate("/dashboard");
+            } else {
+              throw new Error(data.error);
+            }
+          })
+          .catch((error) => {
+            console.log("Error:", error);
+          });
       })
       .catch((error) => {
         console.log("Error:", error);
       });
   };
 
-  /*useEffect(() => {
-    if (!!sessionStorage.getItem("token")) {
-      navigate("dashboard");
-    }
-  }, [userState, navigate]);*/
-
   return (
     <HomeGrid>
-      <form onSubmit={handleSubmit} noValidate autoComplete="on">
+      <form onSubmit={handleSubmit} autoComplete="on">
         <FormWrapper
           className="childComponent"
           sx={{

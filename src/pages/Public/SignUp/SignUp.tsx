@@ -1,11 +1,11 @@
 import { FormWrapper, StyledBox, StyledButton, api } from "@/common";
 import { HomeGrid } from "@/components";
 import { UserCreate } from "@/models";
-import { Box, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import React, { useState, useEffect } from "react";
-import { signUpValidationSchema } from "./utils/signUpValidationSchema";
 import { useNavigate } from "react-router-dom";
 import { post } from "@/services";
+import { inputsValidationSchema } from "@/utils";
 export interface SignUpProps {}
 
 const height: string = "50px";
@@ -36,7 +36,7 @@ const SignUpPage: React.FC<SignUpProps> = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    signUpValidationSchema
+    inputsValidationSchema
       .validate(formValues)
       .then((formValues) => {
         console.log("Validación correcta", formValues);
@@ -55,6 +55,7 @@ const SignUpPage: React.FC<SignUpProps> = () => {
   return (
     <HomeGrid>
       <form onSubmit={handleSubmit} noValidate autoComplete="on">
+
         <FormWrapper
           className="childComponent"
           sx={{

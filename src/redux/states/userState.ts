@@ -1,10 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { UserInfo } from "@/models";
 
-export const EmptyUserState: UserInfo = {
-  token: undefined,
-  role: undefined,
-};
+export const EmptyUserState: UserInfo = {} as UserInfo;
 
 export const userSlice = createSlice({
   name: "user",
