@@ -2,7 +2,6 @@ export { default as FiltersCard } from './Private/DashBoard/Components/FiltersCa
 export { default as ProductCard } from './Private/DashBoard/Components/ProductCard';
 export { default as ProductsGrid } from './Private/DashBoard/Components/ProductsGrid';
 export { default as DashBoard } from './Private/DashBoard/DashBoard';
-export * from './Private/DashBoard/Utils/fetchProducts';
 export { default as filter } from './Private/DashBoard/Utils/filter';
 export * from './Private/InfoProduct/InfoProduct';
 export { default as Orders } from './Private/Orders/Orders';

@@ -26,6 +26,8 @@ const SignUpSeller: React.FC<SignUpProps> = () => {
     isSeller: true,
   });
 
+  const [storeName, setStoreName] = useState<string>("");
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormValues((prevState) => ({
@@ -34,18 +36,23 @@ const SignUpSeller: React.FC<SignUpProps> = () => {
     }));
   };
 
+  const handleStoreName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    setStoreName(value);
+  };
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     inputsValidationSchema
       .validate(formValues)
       .then((formValues) => {
         console.log("Validación correcta", formValues);
-        const fetchAuth = async () => {
-          const response = await post(api.register, formValues);
-          //post store create({name: nombre})
+        const fetchCreate = async () => {
+          const register = await post(api.register, formValues);
+          const store = await post(api.createStore, { name: storeName });
         };
 
-        fetchAuth().then(() => {
+        fetchCreate().then(() => {
           navigate("/");
         });
       })
@@ -69,6 +76,16 @@ const SignUpSeller: React.FC<SignUpProps> = () => {
             "& button": { marginBottom: margin },
           }}
         >
+          <TextField
+            id="storeName"
+            name="storeName"
+            label="Nombre de la tienda"
+            type="text"
+            value={storeName}
+            onChange={handleStoreName}
+            variant="outlined"
+            required
+          />
           <TextField
             id="firstname"
             name="firstname"
