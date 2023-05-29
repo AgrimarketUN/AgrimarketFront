@@ -1,7 +1,6 @@
 # Build
 
-ARG VITE_SERVER_URL
-ENV VITE_SERVER_URL=${VITE_SERVER_URL}
+
 
 FROM node:20.2.0-alpine3.17 as build
 WORKDIR /app
@@ -9,7 +8,8 @@ COPY . .
 RUN npm ci
 RUN npm run build
 
-
+ARG VITE_SERVER_URL
+ENV VITE_SERVER_URL=${VITE_SERVER_URL}
 
 # Run
 FROM nginx:stable-alpine3.17 as production
