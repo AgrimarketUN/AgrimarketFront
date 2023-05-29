@@ -26,7 +26,7 @@ export const getProducts = (filters: ProductsFilters) => {
 
 export const getSellerProducts = () => {//filters: ProductsFilters) => {
   const response = async () => {
-    const data = await get(api.getSellerProducts);
+    const data = await get(api.addItem);//api.getSellerProducts);
     return data.Products as Product[];
   };
 
