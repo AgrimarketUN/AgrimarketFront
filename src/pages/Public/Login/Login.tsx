@@ -10,6 +10,7 @@ import { post } from "@/services";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/redux/states/userState";
 import { useSelector } from "react-redux";
+import styled from "styled-components";
 
 export interface LoginProps {}
 

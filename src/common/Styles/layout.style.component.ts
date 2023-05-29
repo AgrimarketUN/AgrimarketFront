@@ -67,3 +67,9 @@ export const StyledTextButton = styled(Button)`
     text-decoration: underline;
   }
 `;
+
+export const LoginPage = styled.div`
+display: "flex";
+        justifyContent: "center";
+        height: "100%";
+`;

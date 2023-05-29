@@ -2,12 +2,8 @@ import React from "react";
 import {
   Box,
   Container,
-  Grid,
   Typography,
-  Button,
-  Autocomplete,
-  TextField,
-  IconButton,
+  Button
 } from "@mui/material";
 import { Cart } from "@/components/Cart/Cart";
 import { useNavigate } from "react-router";

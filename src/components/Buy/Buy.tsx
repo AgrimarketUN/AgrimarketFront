@@ -1,8 +1,5 @@
-import { Card, CardActions, CardContent, CardMedia, IconButton, Typography, Grid, TextField, Divider } from '@mui/material'
+import { Card, CardActions, CardContent, CardMedia, Typography, Grid, Divider } from '@mui/material'
 import React, { useState } from 'react'
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import DeleteIcon from '@mui/icons-material/Delete';
 
 export const Buy: React.FC<{}> = () => {
     const [count, setCount] = useState<number>(0);
@@ -32,7 +29,6 @@ export const Buy: React.FC<{}> = () => {
                 <CardContent sx={{ width: '30%' }}>
                     <Typography variant='h5' sx={{ mx: '1rem', my: '4rem' }}>$Precio</Typography>
                 </CardContent>
-                <Divider orientation="vertical" flexItem />
                 
             </Card>
             <Divider sx={{mb:'0.5rem'}} />
