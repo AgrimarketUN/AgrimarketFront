@@ -23,7 +23,6 @@ const SignUpPage: React.FC<SignUpProps> = () => {
     password: "",
     address: "",
     phone: "",
-    isSeller: false,
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
