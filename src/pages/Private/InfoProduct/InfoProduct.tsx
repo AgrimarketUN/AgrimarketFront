@@ -7,6 +7,7 @@ import {
   Button,
   TextField,
   IconButton,
+  InputAdornment,
 } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
@@ -34,7 +35,11 @@ export const InfoProduct: React.FC<InfoProductProps> = () => {
   function decrementCount() {
     const updatedCount = quantity - 1;
     setQuantity(updatedCount);
-  }
+  };
+
+  const changeQuantity = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuantity(Number(e.target.value));
+  };
 
   const handleAddToCart = (
     productId: number,
@@ -86,11 +91,17 @@ export const InfoProduct: React.FC<InfoProductProps> = () => {
                     <RemoveCircleIcon />
                   </IconButton>
                 </Grid>
-                <Grid item xs={3} p={0} sx={{ mb: "2rem" }}>
+                <Grid item xs={5} p={0} sx={{ mb: "2rem" }}>
                   <TextField
-                    label={"Cantidad"}
                     value={quantity}
                     variant="outlined"
+                    onChange={changeQuantity}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">{product.unit}</InputAdornment>
+                      ),
+                      inputProps: { min: 0, max: product.availableQuantity },
+                    }}
                   />
                 </Grid>
                 <Grid item xs={2} p={0}>
@@ -101,7 +112,7 @@ export const InfoProduct: React.FC<InfoProductProps> = () => {
               </Grid>
 
               <Typography sx={{ fontSize: "small", mb: "2rem" }}>
-                {"Disponible: " + product.availableQuantity}
+                {`Disponible: ${product.availableQuantity} ${product.unit}`}
               </Typography>
 
               <Button

@@ -115,6 +115,9 @@ const LoginPage: React.FC<LoginProps> = () => {
           <StyledTextButton onClick={() => navigate("/signup")}>
             Registro
           </StyledTextButton>
+          <StyledTextButton onClick={() => navigate("/signupSeller")}>
+            ¿Quieres vender con nostros?
+          </StyledTextButton>
         </FormWrapper>
       </form>
     </HomeGrid>

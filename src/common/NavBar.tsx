@@ -104,6 +104,10 @@ const NavBar: React.FC<{}> = () => {
     navigate("/profile");
   };
 
+  const handleOrders = () => {
+    navigate("/orders");
+  };
+
   const handleLogo = () => {
     dispatcher(clearFilters());
     navigate("/dashboard");
@@ -131,9 +135,10 @@ const NavBar: React.FC<{}> = () => {
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleProfile}>Profile</MenuItem>
-      <MenuItem onClick={handleLogOut}>Logout</MenuItem>
+    > 
+      <MenuItem onClick={handleProfile}>Perfil</MenuItem>
+      <MenuItem onClick={handleOrders}>Ordenes</MenuItem>
+      <MenuItem onClick={handleLogOut}>Cerrar sesión</MenuItem>
     </Menu>
   );
 

@@ -1,9 +1,12 @@
+import { PrivateGrid } from '@/common';
 import React from 'react'
 
 const Order: React.FC<{}> = () => {
   return (
-    <div>
-      <h1>Order</h1>
-    </div>
+    <PrivateGrid>
+      <h1>Orders</h1>
+    </PrivateGrid>
   )
 };
+
+export default Order;

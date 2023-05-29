@@ -15,7 +15,7 @@ import React, { useState } from "react";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { AppStore, Product } from "@/models";
+import { AppStore, Item, Product } from "@/models";
 import { deleteProduct, getProduct, updateProduct } from "@/utils";
 import { useDispatch } from "react-redux";
 import { Button } from "react-bootstrap";
@@ -23,12 +23,11 @@ import { useSelector } from "react-redux";
 
 interface CartProps {
   productId: string;
+  item: Item;
 };
 
-export const Item: React.FC<CartProps> = ({ productId }) => {
+export const CartItem: React.FC<CartProps> = ({ productId, item}) => {
   const dispatcher = useDispatch();
-  const shoppingCart = useSelector((state: AppStore) => state.shoppingCart);
-  const item = shoppingCart[parseInt(productId)];
   const [newQuantity, setNewQuantity] = useState<number>(item.quantity);
 
   function incrementquantity() {
@@ -64,11 +63,13 @@ export const Item: React.FC<CartProps> = ({ productId }) => {
             "https://thumbs.dreamstime.com/z/imagen-del-tema-de-los-productos-agr%C3%ADcolas-34266908.jpg"
           }
           alt="Imagen Producto"
+          onClick={() => window.open(`/product/${productId}`, "_blank")}
         />
         <CardContent sx={{ width: "20rem" }}>
           <Typography
             variant="h5"
             sx={{ fontWeight: "bold", ml: "0.2rem", my: "1rem" }}
+            onClick={() => window.open(`/product/${productId}`, "_blank")}
           >
             {item.name}
           </Typography>
@@ -98,8 +99,8 @@ export const Item: React.FC<CartProps> = ({ productId }) => {
                   id="quantity"
                   sx={{ mx: "1rem", my: "0.5rem" }}
                   InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
+                    endAdornment: (
+                      <InputAdornment position="end">
                         {item.unit}
                       </InputAdornment>
                     ),
@@ -127,6 +128,7 @@ export const Item: React.FC<CartProps> = ({ productId }) => {
                   item.availableQuantity
                 )
               }
+              disabled={newQuantity === item.quantity}
             >
               Confirmar modificación
             </Button>

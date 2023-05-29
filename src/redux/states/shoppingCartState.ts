@@ -10,7 +10,7 @@ export const shoppingCartSlice = createSlice({
     setShoppingCart: (state, action) => action.payload,
 
     addItem: (state, action) => {
-      state[action.payload.productId] = action.payload.quantity;
+      state[action.payload.productId] = action.payload.value;
     },
 
     removeItem: (state, action) => {
@@ -18,7 +18,7 @@ export const shoppingCartSlice = createSlice({
     },
 
     updateItemQuantity: (state, action) => {
-      state[action.payload.productId] = action.payload.quantity;
+      state[action.payload.productId].quantity = action.payload.quantity;
     },
 
     clearShoppingCart: () => EmptyShoppingCartState,

@@ -2,14 +2,18 @@ export { default as FiltersCard } from './Private/DashBoard/Components/FiltersCa
 export { default as ProductCard } from './Private/DashBoard/Components/ProductCard';
 export { default as ProductsGrid } from './Private/DashBoard/Components/ProductsGrid';
 export { default as DashBoard } from './Private/DashBoard/DashBoard';
-export * from './Private/DashBoard/Utils/fetchProducts';
 export { default as filter } from './Private/DashBoard/Utils/filter';
 export * from './Private/InfoProduct/InfoProduct';
-export { default as ShoppingCart } from './Private/ShoppingCart/ShoppingCart';
+export { default as Orders } from './Private/Orders/Orders';
 export { default as Private } from './Private/Private';
 export { default as ProfileUser } from './Private/ProfileUser/ProfileUser';
 export * from './Private/Purchase/Purchase';
+export * from './Private/Purchase/components/Buy';
+export { default as PurchaseExit } from './Private/PurchaseExit/PurchaseExit';
+export { default as ShoppingCart } from './Private/ShoppingCart/ShoppingCart';
+export * from './Private/ShoppingCart/components/CartItem';
 export { default as UpdateProfileUser } from './Private/UpdateProfileUser/UpdateProfileUser';
+export * from './Private/UpdateProfileUser/Utils/updateUser';
 export { default as ForgotPassword } from './Public/ForgotPassword/ForgotPassword';
 export * from './Public/ForgotPassword/utils/forgotPasswordValidationSchema';
 export { default as Login } from './Public/Login/Login';
@@ -19,4 +23,4 @@ export { default as RestorePassword } from './Public/RestorePassword/RestorePass
 export { default as resetPasswordValidationSchema } from './Public/RestorePassword/utils/resetPasswordValidationSchema';
 export { default as SignUp } from './Public/SignUp/SignUp';
 export * from './Public/SignUp/utils/signUpValidationSchema';
-export { default as PurchaseExit } from './Private/PurchaseExit/PurchaseExit';
+export { default as SignUpSeller } from './Public/SignUpSeller/SignUpSeller';

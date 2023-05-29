@@ -13,7 +13,7 @@ const width: string = "400px";
 const margin: string = "20px";
 const radius: string = "30px";
 
-const SignUpPage: React.FC<SignUpProps> = () => {
+const SignUpSeller: React.FC<SignUpProps> = () => {
   const navigate = useNavigate();
 
   const [formValues, setFormValues] = useState<UserCreate>({
@@ -23,8 +23,10 @@ const SignUpPage: React.FC<SignUpProps> = () => {
     password: "",
     address: "",
     phone: "",
-    isSeller: false,
+    isSeller: true,
   });
+
+  const [storeName, setStoreName] = useState<string>("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -34,16 +36,23 @@ const SignUpPage: React.FC<SignUpProps> = () => {
     }));
   };
 
+  const handleStoreName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    setStoreName(value);
+  };
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     inputsValidationSchema
       .validate(formValues)
       .then((formValues) => {
         console.log("Validación correcta", formValues);
-        const fetchAuth = async () => {
-          const response = await post(api.register, formValues);
+        const fetchCreate = async () => {
+          const register = await post(api.register, formValues);
+          const store = await post(api.createStore, { name: storeName });
         };
-        fetchAuth().then(() => {
+
+        fetchCreate().then(() => {
           navigate("/");
         });
       })
@@ -67,6 +76,16 @@ const SignUpPage: React.FC<SignUpProps> = () => {
             "& button": { marginBottom: margin },
           }}
         >
+          <TextField
+            id="storeName"
+            name="storeName"
+            label="Nombre de la tienda"
+            type="text"
+            value={storeName}
+            onChange={handleStoreName}
+            variant="outlined"
+            required
+          />
           <TextField
             id="firstname"
             name="firstname"
@@ -139,4 +158,4 @@ const SignUpPage: React.FC<SignUpProps> = () => {
   );
 };
 
-export default SignUpPage;
+export default SignUpSeller;
