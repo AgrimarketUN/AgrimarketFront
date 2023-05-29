@@ -24,11 +24,15 @@ function ProductsGrid() {
 
   return (
     <Grid container spacing={2}>
-      {products.map((product) => (
-        <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
-          <ProductCard product={product} />
-        </Grid>
-      ))}
+      {products.length === 0 ? (
+        <h1>No products found</h1>
+      ) : (
+        products.map((product) => (
+          <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
+            <ProductCard product={product} />
+          </Grid>
+        ))
+      )}
     </Grid>
   );
 }

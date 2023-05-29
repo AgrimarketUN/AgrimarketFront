@@ -24,17 +24,32 @@ export const getProducts = (filters: ProductsFilters) => {
     });
 };
 
-export const createProduct = (product: Product) => {
+export const getSellerProducts = (filters: ProductsFilters) => {
   const response = async () => {
-    const data = await post(api.createProduct, product);
-    return data;
+    const data = await get(api.getSellerProducts);
+    return data.Products as Product[];
   };
 
   response()
     .then((data) => {
       console.log(data);
+      if (filters !== EmptyFiltersState) {
+        productsService.setSubject(filter(data, filters));
+      } else {
+        productsService.setSubject(data);
+      }
     })
     .catch((e) => {
       console.error(e);
     });
+};
+
+export const getProduct = async (id: string): Promise<Product> => {
+  try {
+    const data = await get(api.getProduct + id);
+    return data.Product as Product;
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
 };

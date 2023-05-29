@@ -23,7 +23,6 @@ const SignUpSeller: React.FC<SignUpProps> = () => {
     password: "",
     address: "",
     phone: "",
-    isSeller: true,
   });
 
   const [storeName, setStoreName] = useState<string>("");
@@ -47,13 +46,17 @@ const SignUpSeller: React.FC<SignUpProps> = () => {
       .validate(formValues)
       .then((formValues) => {
         console.log("Validación correcta", formValues);
-        const fetchCreate = async () => {
+        const register = async () => {
           const register = await post(api.register, formValues);
-          const store = await post(api.createStore, { name: storeName });
+        };
+        const createStore = async () => {
+          const store = await post(api.createStore, { name: storeName, email: formValues.email });
         };
 
-        fetchCreate().then(() => {
-          navigate("/");
+        register().then(() => {
+          createStore().then(() => {
+            navigate("/");
+          });
         });
       })
       .catch((error) => {

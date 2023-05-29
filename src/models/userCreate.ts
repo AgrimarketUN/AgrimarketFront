@@ -5,5 +5,4 @@ export interface UserCreate {
   password: string;
   address: string;
   phone: string;
-  isSeller: boolean;
 };

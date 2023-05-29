@@ -5,12 +5,19 @@ import { Grid } from "@mui/material";
 import FiltersCard from "./Components/FiltersCard";
 import { useSelector } from "react-redux";
 import { AppStore } from "@/models";
-import { getProducts } from "@/utils";
+import { getProducts, getSellerProducts } from "@/utils";
 
 const DashBoard: React.FC<{}> = () => {
+  const isSeller = useSelector((state: AppStore) => state.user.isSeller);
   const filters = useSelector((state: AppStore) => state.filters);
 
-  React.useEffect(() => getProducts(filters), [filters]);
+  React.useEffect(() => {
+    if (isSeller) {
+      getSellerProducts(filters);
+    } else {
+      getProducts(filters);
+    }
+  }, [filters]);
 
   return (
     <PrivateGrid>

@@ -12,6 +12,7 @@ export const api = {
   createProduct: import.meta.env.VITE_ENDPOINT_CREATE_PRODUCT,
   updateProduct: import.meta.env.VITE_ENDPOINT_UPDATE_PRODUCT,
   deleteProduct: import.meta.env.VITE_ENDPOINT_DELETE_PRODUCT,
+  getSellerProducts: import.meta.env.VITE_ENDPOINT_GET_SELLER_PRODUCTS,
 
   // order
   getOrders: import.meta.env.VITE_ENDPOINT_GET_ORDERS,

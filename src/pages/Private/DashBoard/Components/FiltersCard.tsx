@@ -21,7 +21,7 @@ import {
 } from "@/redux/states/filtersState";
 import { Stack } from "@mui/system";
 import { useSelector } from "react-redux";
-import { getProducts } from "@/utils";
+import { getProducts, getSellerProducts } from "@/utils";
 import CreateProduct from "./CreateProduct";
 
 interface FiltterCardProps {}
@@ -63,7 +63,11 @@ const FiltersCard: React.FC<FiltterCardProps> = () => {
 
   const clearAllFilters = () => {
     dispatch(clearFilters());
-    getProducts(EmptyFiltersState);
+    if (isSeller) {
+      getSellerProducts(EmptyFiltersState);
+    } else{
+      getProducts(EmptyFiltersState);
+    }
   };
 
   const createProduct = () => {

@@ -5,5 +5,4 @@ export * from './fetchUserInfo';
 export * from './inputsValidationSchema';
 export * from './snackBarUtils';
 export * from './validationErrors';
-export * from './productsAction';
 export * from './productActions';
