@@ -1,16 +1,25 @@
+import React from "react";
 import styled from "styled-components";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-//import background from "../../assets/Homebackground.svg";
+import background from "@/assets/Homebackground.svg";
 
 export const HomeWrapper = styled.div`
+  margin
+  justifyContent: "center";
+  background-image: url(${background});
   background-size: cover;
   background-repeat: no-repeat;
   height: 100%;
   width: 100%;
   margin: 0;
+  padding: 0;
   overflow: hidden;
+  display: "flex";
+  alignItems: "center";
+  justifyContent: "center";
 `;
+
 
 export const PrivateWrapper = styled(Box)`
   background-repeat: no-repeat;
@@ -40,6 +49,8 @@ export const FormWrapper = styled(Box)`
   width: 403px;
 `;
 
+
+
 export const StyledBox = styled(Box)`
   align-items: center;
   margin-bottom: 10px;
@@ -65,4 +76,10 @@ export const StyledTextButton = styled(Button)`
   & .MuiButton-label {
     text-decoration: underline;
   }
+`;
+
+export const LoginPage = styled.div`
+display: "flex";
+        justifyContent: "center";
+        height: "100%";
 `;
