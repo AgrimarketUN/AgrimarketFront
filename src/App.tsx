@@ -1,4 +1,4 @@
-//import "./App.css";
+import "./App.css";
 import { SnackbarProvider } from "notistack";
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from "./Router";

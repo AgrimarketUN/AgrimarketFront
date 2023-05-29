@@ -5,9 +5,7 @@ import Button from "@mui/material/Button";
 import background from "@/assets/Homebackground.svg";
 
 export const HomeWrapper = styled.div`
-  margin
-  justifyContent: "center";
-  background-image: url(${background});
+  //background-image: url(${background});
   background-size: cover;
   background-repeat: no-repeat;
   height: 100%;
@@ -16,8 +14,6 @@ export const HomeWrapper = styled.div`
   padding: 0;
   overflow: hidden;
   display: "flex";
-  alignItems: "center";
-  justifyContent: "center";
 `;
 
 

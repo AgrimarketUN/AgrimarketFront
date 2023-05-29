@@ -56,9 +56,9 @@ const CreateProduct: React.FC<{}> = () => {
   };
 
   const handleSubmit = () => {
-    console.log(product);
+    //console.log(product);
     createProduct(product).then((res) => {
-      console.log("respuesta create:", res);
+      //console.log("respuesta create:", res);
     });
     setOpen(false);
   };
