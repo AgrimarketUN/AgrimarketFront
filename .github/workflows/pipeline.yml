@@ -25,7 +25,7 @@ jobs:
       with:
         context: .
         push: true
-        tags: psiquedelos/is2_back:latest
+        tags: psiquedelos/is2_front:latest
         build-args: |
           VITE_SERVER_URL: ${{ secrets.VITE_SERVER_URL }}
           VITE_ENDPOINT_LOGIN: ${{ secrets.VITE_ENDPOINT_LOGIN }}
